@@ -339,7 +339,13 @@
 
 				items.forEach(function (item, index) {
 					var delay = (index % 2 === 0) ? "" : ' data-wow-delay="0.2s"';
-					var detailUrl = "portfolio-detail.html?slug=" + item.slug;
+					// Local dev pe ?slug=, production (koi bhi domain) pe clean URL
+					var isLocalDev = window.location.hostname === "127.0.0.1" ||
+					                 window.location.hostname === "localhost" ||
+					                 window.location.protocol === "file:";
+					var detailUrl = (isLocalDev || !item.slug)
+						? "portfolio-detail.html?slug=" + item.slug
+						: "/" + item.slug;
 					var thumb = item.thumbnailImage || "images/project-1.jpg";
 					var col = [
 						'<div class="col-lg-6 col-md-6">',
@@ -470,7 +476,13 @@
 
 				blogs.forEach(function (blog, index) {
 					var delay = ["", ' data-wow-delay="0.2s"', ' data-wow-delay="0.4s"'][index % 3];
-					var detailUrl = "blog-detail.html?id=" + blog._id;
+					// Local dev pe ?id=, production (koi bhi domain) pe clean URL slug
+					var isLocalDev = window.location.hostname === "127.0.0.1" ||
+					                 window.location.hostname === "localhost" ||
+					                 window.location.protocol === "file:";
+					var detailUrl = (isLocalDev || !blog.url)
+						? "blog-detail.html?id=" + blog._id
+						: "/" + blog.url;
 					var img = blog.mainImage || ("images/post-" + ((index % 6) + 1) + ".jpg");
 					var desc = blog.shortDescription || "";
 					var col = [
@@ -507,12 +519,27 @@
 	/* ── Blog Detail Page — Dynamic Loader ── */
 	if ($("#blogPageTitle").length) {
 		var urlParams = new URLSearchParams(window.location.search);
-		var blogId = urlParams.get("id");
+		var blogId   = urlParams.get("id");
+		var blogSlug = urlParams.get("slug") || null;
 
-		if (!blogId) {
+		// Netlify clean URL — path se slug lo (no query param)
+		if (!blogId && !blogSlug) {
+			var pathParts = window.location.pathname.replace(/\/$/, "").split("/");
+			var lastSegment = pathParts[pathParts.length - 1] || "";
+			if (lastSegment && lastSegment.indexOf(".html") === -1) {
+				blogSlug = lastSegment;
+			}
+		}
+
+		if (!blogId && !blogSlug) {
 			$("#blogPageTitle").text("Post Not Found");
 		} else {
-			ARV_API.getBlogById(blogId)
+			// id hoga to getBlogById, slug hoga to getBlogByUrl
+			var apiCall = blogId
+				? ARV_API.getBlogById(blogId)
+				: ARV_API.getBlogByUrl(blogSlug);
+
+			apiCall
 				.then(function (res) { return res.json(); })
 				.then(function (response) {
 					if (!response.success || !response.data) {
