@@ -258,12 +258,68 @@
 		},
 		zoom: {
 			enabled: true,
-			duration: 300, // don't foget to change the duration also in CSS
+			duration: 300,
 			opener: function (element) {
 				return element.find('img');
 			}
 		}
 	});
+
+	/* ── Gallery Page — Dynamic Loader ── */
+	if ($("#galleryRow").length) {
+		ARV_API.getGallery()
+			.then(function (res) { return res.json(); })
+			.then(function (response) {
+				if (!response.success || !response.data.gallery.length) return;
+
+				// sirf isActive: true wali images lo
+				var items = response.data.gallery.filter(function (g) { return g.isActive; });
+				if (!items.length) return;
+
+				var $row = $("#galleryRow");
+				$row.empty();
+
+				items.forEach(function (item, index) {
+					var delay = (index % 3) * 0.2;
+					var altText = item.title || "ArchiVastu Consultants Gallery";
+					var col = [
+						'<div class="col-lg-4 col-md-6">',
+						'  <div class="photo-gallery wow fadeInUp" data-wow-delay="' + delay + 's">',
+						'    <a href="' + item.url + '" data-cursor-text="View">',
+						'      <figure>',
+						'        <img src="' + item.url + '" alt="' + altText + '">',
+						'      </figure>',
+						'    </a>',
+						'  </div>',
+						'</div>'
+					].join("");
+					$row.append(col);
+				});
+
+				// Magnific Popup reinit after dynamic inject
+				$('.gallery-items').magnificPopup({
+					delegate: 'a',
+					type: 'image',
+					closeOnContentClick: false,
+					closeBtnInside: false,
+					mainClass: 'mfp-with-zoom',
+					image: { verticalFit: true },
+					gallery: { enabled: true },
+					zoom: {
+						enabled: true,
+						duration: 300,
+						opener: function (element) { return element.find('img'); }
+					}
+				});
+
+				// WOW reinit for new elements
+				new WOW().init();
+			})
+			.catch(function (err) {
+				console.warn("Gallery load failed.", err);
+			});
+	}
+	/* ── Gallery Page End ── */
 
 	/* Contact form validation */
 	var $contactform = $("#contactForm");
