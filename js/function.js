@@ -455,6 +455,120 @@
 	}
 	/* ── Portfolio Detail Page End ── */
 
+	/* ── Blog List Page — Dynamic Loader ── */
+	if ($("#blogRow").length) {
+		ARV_API.getBlogs()
+			.then(function (res) { return res.json(); })
+			.then(function (response) {
+				if (!response.success || !response.data.blogs.length) return;
+
+				var blogs = response.data.blogs.filter(function (b) { return b.isActive; });
+				if (!blogs.length) return;
+
+				var $row = $("#blogRow");
+				$row.empty();
+
+				blogs.forEach(function (blog, index) {
+					var delay = ["", ' data-wow-delay="0.2s"', ' data-wow-delay="0.4s"'][index % 3];
+					var detailUrl = "blog-detail.html?id=" + blog._id;
+					var img = blog.mainImage || ("images/post-" + ((index % 6) + 1) + ".jpg");
+					var desc = blog.shortDescription || "";
+					var col = [
+						'<div class="col-lg-4 col-md-6">',
+						'  <div class="post-item wow fadeInUp"' + delay + '>',
+						'    <div class="post-featured-image">',
+						'      <a href="' + detailUrl + '" data-cursor-text="View">',
+						'        <figure class="image-anime">',
+						'          <img src="' + img + '" alt="' + blog.heading + '">',
+						'        </figure>',
+						'      </a>',
+						'    </div>',
+						'    <div class="post-item-content">',
+						'      <h3><a href="' + detailUrl + '">' + blog.heading + '</a></h3>',
+						'      <p>' + desc + '</p>',
+						'    </div>',
+						'    <div class="post-item-btn">',
+						'      <a href="' + detailUrl + '">read more</a>',
+						'    </div>',
+						'  </div>',
+						'</div>'
+					].join("");
+					$row.append(col);
+				});
+
+				new WOW().init();
+			})
+			.catch(function (err) {
+				console.warn("Blog list load failed.", err);
+			});
+	}
+	/* ── Blog List Page End ── */
+
+	/* ── Blog Detail Page — Dynamic Loader ── */
+	if ($("#blogPageTitle").length) {
+		var urlParams = new URLSearchParams(window.location.search);
+		var blogId = urlParams.get("id");
+
+		if (!blogId) {
+			$("#blogPageTitle").text("Post Not Found");
+		} else {
+			ARV_API.getBlogById(blogId)
+				.then(function (res) { return res.json(); })
+				.then(function (response) {
+					if (!response.success || !response.data) {
+						$("#blogPageTitle").text("Post Not Found");
+						return;
+					}
+
+					var b = response.data.blog || response.data;
+
+					// Page meta
+					document.title = b.heading + " | ArchiVastu Consultants";
+					if (b.seoTitle) document.title = b.seoTitle + " | ArchiVastu Consultants";
+					$("#metaDescription").attr("content", b.shortDescription || "");
+					$("#metaKeywords").attr("content", b.metaKeywords || "");
+
+					// Page header
+					$("#blogPageTitle").text(b.heading);
+					$("#blogBreadcrumb").text(b.heading);
+
+					// Main image
+					if (b.mainImage) {
+						$("#blogMainImage").attr("src", b.mainImage).attr("alt", b.heading);
+					}
+
+					// Meta line — first tag + date
+					var firstTag = (b.tags && b.tags.length) ? b.tags[0] : "ArchiVastu Consultants";
+					var dateStr = b.createdAt
+						? new Date(b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })
+						: "";
+					$("#blogMeta").html("<strong>" + firstTag + "</strong>" + (dateStr ? " &nbsp;&middot;&nbsp; " + dateStr : ""));
+
+					// Heading + content
+					$("#blogHeading").text(b.heading);
+					$("#blogDetails").html(b.details || "");
+
+					// Tags — dynamic
+					if (b.tags && b.tags.length) {
+						var tagsHtml = 'Tags: ';
+						b.tags.forEach(function (tag) {
+							tagsHtml += '<a href="blog.html">' + tag + '</a> ';
+						});
+						$(".post-tags .tag-links").html(tagsHtml);
+					} else {
+						$(".post-tags").hide();
+					}
+
+					new WOW().init();
+				})
+				.catch(function (err) {
+					console.warn("Blog detail load failed.", err);
+					$("#blogPageTitle").text("Failed to load post.");
+				});
+		}
+	}
+	/* ── Blog Detail Page End ── */
+
 	/* Contact form validation */
 	var $contactform = $("#contactForm");
 	$contactform.validator({ focus: false }).on("submit", function (event) {

@@ -5,6 +5,7 @@ const ARV_API = {
   // --- GET calls (public) ---
   getBlogs:         () => fetch(`${API_BASE}/blogs`),
   getBlogById:      (id) => fetch(`${API_BASE}/blogs/${id}`),
+  getBlogByUrl:     (url) => fetch(`${API_BASE}/blogs?url=${encodeURIComponent(url)}`),
   getPortfolios:    () => fetch(`${API_BASE}/portfolio`),
   getPortfolioBySlug: (slug) => fetch(`${API_BASE}/portfolio/slug/${slug}`),
   getPortfolioById:   (id)   => fetch(`${API_BASE}/portfolio/${id}`),
