@@ -1,5 +1,12 @@
 // js/api.js
-const API_BASE = "http://localhost:5000/api";
+// API base URL — local dev pe localhost, production pe live backend URL
+const API_BASE = (
+  window.location.hostname === "127.0.0.1" ||
+  window.location.hostname === "localhost" ||
+  window.location.protocol === "file:"
+)
+  ? "http://localhost:5000/api"
+  : "https://avr-backend-bhll.onrender.com/api"; 
 
 const ARV_API = {
   // --- GET calls (public) ---
@@ -22,7 +29,7 @@ const ARV_API = {
     }),
 
   submitBookConsultation: (data) =>
-    fetch(`${API_BASE}/bookConslution`, {  // backend mein typo hai isliye same rakho
+    fetch(`${API_BASE}/bookConslution`, { 
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
