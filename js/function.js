@@ -321,6 +321,140 @@
 	}
 	/* ── Gallery Page End ── */
 
+	/* ── Portfolio List Page — Dynamic Loader ── */
+	if ($("#portfolioRow").length) {
+		ARV_API.getPortfolios()
+			.then(function (res) { return res.json(); })
+			.then(function (response) {
+				if (!response.success || !response.data.portfolios.length) return;
+
+				// sirf activeStatus: true aur meaningful slug wale lo
+				var items = response.data.portfolios.filter(function (p) {
+					return p.activeStatus && p.slug && p.title.length > 5;
+				});
+				if (!items.length) return;
+
+				var $row = $("#portfolioRow");
+				$row.empty();
+
+				items.forEach(function (item, index) {
+					var delay = (index % 2 === 0) ? "" : ' data-wow-delay="0.2s"';
+					var detailUrl = "portfolio-detail.html?slug=" + item.slug;
+					var thumb = item.thumbnailImage || "images/project-1.jpg";
+					var col = [
+						'<div class="col-lg-6 col-md-6">',
+						'  <div class="project-item wow fadeInUp"' + delay + '>',
+						'    <div class="project-featured-image">',
+						'      <a href="' + detailUrl + '" data-cursor-text="View">',
+						'        <figure class="image-anime">',
+						'          <img src="' + thumb + '" alt="' + item.title + '">',
+						'        </figure>',
+						'      </a>',
+						'    </div>',
+						'    <div class="project-btn">',
+						'      <a href="' + detailUrl + '"><img src="images/arrow-white.svg" alt=""></a>',
+						'    </div>',
+						'    <div class="project-content">',
+						'      <h3>' + item.category + '</h3>',
+						'      <h2><a href="' + detailUrl + '">' + item.title + '</a></h2>',
+						'    </div>',
+						'  </div>',
+						'</div>'
+					].join("");
+					$row.append(col);
+				});
+
+				new WOW().init();
+			})
+			.catch(function (err) {
+				console.warn("Portfolio list load failed.", err);
+			});
+	}
+	/* ── Portfolio List Page End ── */
+
+	/* ── Portfolio Detail Page — Dynamic Loader ── */
+	if ($("#detailPageTitle").length) {
+		// URL se slug padhlo: portfolio-detail.html?slug=riverside-villa-interior-design
+		var urlParams = new URLSearchParams(window.location.search);
+		var slug = urlParams.get("slug");
+
+		if (!slug) {
+			$("#detailPageTitle").text("Project Not Found");
+			return;
+		}
+
+		ARV_API.getPortfolioBySlug(slug)
+			.then(function (res) { return res.json(); })
+			.then(function (response) {
+				if (!response.success || !response.data) {
+					$("#detailPageTitle").text("Project Not Found");
+					return;
+				}
+
+				var p = response.data;
+
+				// Page title + breadcrumb
+				document.title = p.title + " | ArchiVastu Consultants";
+				$("#detailPageTitle").text(p.title);
+				$("#detailBreadcrumb").text(p.title);
+
+				// Sidebar fields
+				$("#detailClient").text(p.clientName || "—");
+				$("#detailCategory").text(p.category || "—");
+				$("#detailLocation").text(p.location || "—");
+				$("#detailDuration").text(p.duration || "—");
+
+				// Banner image
+				if (p.bannerImage) {
+					$("#detailBannerImage").attr("src", p.bannerImage).attr("alt", p.title);
+				}
+
+				// Title + description (HTML allowed)
+				$("#detailTitle").text(p.title);
+				$("#detailDescription").html(p.description || "");
+
+				// Gallery images
+				if (p.galleryImages && p.galleryImages.length) {
+					var $gallery = $("#detailGallery");
+					$gallery.empty();
+					p.galleryImages.forEach(function (imgUrl) {
+						// skip agar URL nahi hai (kuch entries mein IDs hain)
+						if (!imgUrl || !imgUrl.startsWith("http")) return;
+						$gallery.append(
+							'<div class="project-gallery-img">' +
+							'  <a href="' + imgUrl + '" data-cursor-text="View">' +
+							'    <figure><img src="' + imgUrl + '" alt="' + p.title + '"></figure>' +
+							'  </a>' +
+							'</div>'
+						);
+					});
+
+					// Magnific Popup init for gallery
+					$(".project-gallery-images").magnificPopup({
+						delegate: "a",
+						type: "image",
+						closeOnContentClick: false,
+						closeBtnInside: false,
+						mainClass: "mfp-with-zoom",
+						image: { verticalFit: true },
+						gallery: { enabled: true },
+						zoom: {
+							enabled: true,
+							duration: 300,
+							opener: function (el) { return el.find("img"); }
+						}
+					});
+				}
+
+				new WOW().init();
+			})
+			.catch(function (err) {
+				console.warn("Portfolio detail load failed.", err);
+				$("#detailPageTitle").text("Failed to load project.");
+			});
+	}
+	/* ── Portfolio Detail Page End ── */
+
 	/* Contact form validation */
 	var $contactform = $("#contactForm");
 	$contactform.validator({ focus: false }).on("submit", function (event) {

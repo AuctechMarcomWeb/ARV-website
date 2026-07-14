@@ -1,0 +1,21 @@
+# Netlify clean URL rewrites for portfolio detail pages
+# /:slug → /portfolio-detail.html?slug=:slug
+# 200 = rewrite (URL stays clean in browser, no redirect)
+#
+# Known static pages are listed FIRST so they are NOT caught by the wildcard below.
+# Netlify processes rules top-to-bottom and stops at the first match.
+
+# ── Static pages — must come before the wildcard ──
+/index.html                     /index.html                     200
+/about.html                     /about.html                     200
+/services.html                  /services.html                  200
+/portfolio.html                 /portfolio.html                 200
+/gallery.html                   /gallery.html                   200
+/blog.html                      /blog.html                      200
+/contact.html                   /contact.html                   200
+/book-consultation.html         /book-consultation.html         200
+/portfolio-detail.html          /portfolio-detail.html          200
+/404.html                       /404.html                       200
+
+# ── Portfolio clean URLs — wildcard catches any slug ──
+/:slug  /portfolio-detail.html?slug=:slug  200

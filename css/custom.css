@@ -4719,3 +4719,321 @@ header.main-header .header-sticky.active .navbar{
 .breadcrumb-item + .breadcrumb-item::before {
     content: "/" !important;
 }
+
+
+/* ============================================================
+   ARV — Extra Responsive Fixes
+   Covers: hero slider, portfolio detail, gallery, booking form,
+           contact, blog, all pages — mobile-first additions
+   ============================================================ */
+
+/* ------ 576px and below (small mobile) ------ */
+@media only screen and (max-width: 576px) {
+
+	/* Hero — reduce top padding on small screens */
+	.hero,
+	.hero.hero-slider-layout .hero-slide {
+		padding: 120px 0 80px;
+		min-height: auto;
+	}
+
+	.hero-content .section-title h1,
+	.hero-content .section-title h3 {
+		word-break: break-word;
+	}
+
+	.hero-content .section-title p {
+		font-size: 15px;
+		line-height: 1.6;
+	}
+
+	/* Hero buttons — stack on very small screens */
+	.hero-btn {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		align-items: flex-start;
+	}
+
+	.hero-content .btn-default,
+	.hero-content .btn-default.btn-highlighted {
+		margin: 0 !important;
+		width: auto;
+	}
+
+	/* Page header */
+	.page-header {
+		padding: 120px 0 70px;
+	}
+
+	.page-header-box h1 {
+		font-size: 22px;
+	}
+
+	/* Section titles */
+	.section-title h1 { font-size: 24px; }
+	.section-title h2 { font-size: 22px; }
+
+	/* Portfolio list cards */
+	.page-project .col-lg-6 {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+	.project-content h2 {
+		font-size: 16px;
+	}
+
+	.project-content h3 {
+		font-size: 13px;
+	}
+
+	/* Portfolio detail — sidebar stack */
+	.project-single-sidebar {
+		position: static !important;
+		margin-right: 0;
+		margin-bottom: 25px;
+	}
+
+	.project-detail-list {
+		padding: 15px;
+		gap: 15px;
+	}
+
+	.project-detail-item .icon-box {
+		height: 40px;
+		width: 40px;
+		min-width: 40px;
+	}
+
+	.project-detail-item .icon-box i {
+		font-size: 16px;
+	}
+
+	.project-detail-content h3 {
+		font-size: 13px;
+	}
+
+	.project-detail-content p {
+		font-size: 14px;
+	}
+
+	.project-entry h2 {
+		font-size: 22px;
+	}
+
+	/* Portfolio gallery thumbnails */
+	.project-gallery-images {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 10px;
+	}
+
+	.project-gallery-img {
+		width: 100%;
+	}
+
+	.project-gallery-img img {
+		width: 100%;
+		height: 120px;
+		object-fit: cover;
+		border-radius: 4px;
+	}
+
+	/* Gallery page */
+	.page-gallery .col-lg-4 {
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+
+	.page-gallery-box .row {
+		margin-left: -8px;
+		margin-right: -8px;
+	}
+
+	.photo-gallery {
+		margin-bottom: 16px;
+	}
+
+	/* Book consultation form */
+	.contact-form-box,
+	#bookingForm .form-group {
+		margin-bottom: 16px;
+	}
+
+	#bookingForm select.form-control {
+		font-size: 14px;
+	}
+
+	/* Contact form */
+	#contactForm .form-group {
+		margin-bottom: 16px;
+	}
+
+	/* Sidebar CTA */
+	.sidebar-cta-box {
+		padding: 0;
+	}
+
+	.sidebar-cta-Body {
+		padding: 16px;
+	}
+
+	.sidebar-cta-content h3 {
+		font-size: 18px;
+	}
+
+	.sidebar-cta-contact-item p {
+		font-size: 13px;
+	}
+
+	/* Footer */
+	.footer-social-links {
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+
+	.footer-newsletter-form .form-group input {
+		font-size: 13px;
+	}
+
+	/* Breadcrumb */
+	.breadcrumb {
+		flex-wrap: wrap;
+	}
+
+	.breadcrumb-item {
+		font-size: 13px;
+	}
+
+	/* Blog page */
+	.post-item-content h3 {
+		font-size: 16px;
+	}
+
+	.post-item-content p {
+		font-size: 14px;
+	}
+
+	/* Contact info items — stack */
+	.contact-info-box {
+		flex-direction: column;
+		gap: 15px;
+	}
+
+	.contact-info-item {
+		width: 100%;
+	}
+
+	/* Google map height reduce */
+	.google-map-iframe,
+	.google-map-iframe iframe {
+		height: 250px;
+	}
+}
+
+/* ------ 375px and below (iPhone SE etc.) ------ */
+@media only screen and (max-width: 375px) {
+
+	.hero,
+	.hero.hero-slider-layout .hero-slide {
+		padding: 100px 0 60px;
+	}
+
+	.page-header {
+		padding: 100px 0 60px;
+	}
+
+	.page-header-box h1 {
+		font-size: 20px;
+	}
+
+	.section-title h1 { font-size: 22px; }
+	.section-title h2 { font-size: 20px; }
+
+	.btn-default {
+		padding: 12px 32px 12px 14px;
+		font-size: 13px;
+	}
+
+	.hero-btn {
+		gap: 10px;
+	}
+
+	.project-gallery-images {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.project-gallery-img img {
+		height: 100px;
+	}
+
+	/* Booking form date/select inputs */
+	#bookingForm input,
+	#bookingForm select,
+	#bookingForm textarea {
+		font-size: 13px;
+		padding: 10px 12px;
+	}
+
+	.project-entry h2 {
+		font-size: 20px;
+	}
+
+	.sidebar-cta-content h3 {
+		font-size: 16px;
+	}
+}
+
+/* ------ Tablet fix (768px) ------ */
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+
+	.hero,
+	.hero.hero-slider-layout .hero-slide {
+		padding: 140px 0 100px;
+	}
+
+	.page-header {
+		padding: 150px 0 90px;
+	}
+
+	/* Portfolio detail gallery - 2 columns on tablet */
+	.project-gallery-images {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 12px;
+	}
+
+	.project-gallery-img img {
+		width: 100%;
+		height: 160px;
+		object-fit: cover;
+	}
+
+	/* Contact info - 2 per row */
+	.contact-info-item {
+		width: calc(50% - 10px);
+	}
+}
+
+/* ------ Ensure hero slider image covers on all screens ------ */
+.hero-slide .hero-slider-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+
+/* ------ Fix portfolio-detail banner image on mobile ------ */
+@media only screen and (max-width: 767px) {
+	#detailBannerImage {
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+		border-radius: 6px;
+	}
+
+	.project-single-image {
+		margin-bottom: 20px;
+	}
+}
