@@ -41,20 +41,7 @@
 		});
 	}
 
-	/* Hero Slider Layout JS */
-	const hero_slider_layout = new Swiper('.hero-slider-layout .swiper', {
-		slidesPerView: 1,
-		speed: 1000,
-		spaceBetween: 0,
-		loop: true,
-		autoplay: {
-			delay: 4000,
-		},
-		pagination: {
-			el: '.hero-pagination',
-			clickable: true,
-		},
-	});
+	/* Hero Slider — initialized dynamically after API load (see bottom of file) */
 
 	/* How We Work Client Logo Slider JS */
 	if ($('.how-work-company-slider').length) {
@@ -401,6 +388,80 @@
 		}
 	});
 	/* Our Project (filtering) End */
+
+	/* ── Hero Section — Dynamic Swiper Slider ── */
+	if ($("#heroSwiper").length) {
+		ARV_API.getHomeSliders()
+			.then(function (res) { return res.json(); })
+			.then(function (response) {
+				if (!response.success || !response.data.sliders.length) {
+					// API fail — fallback slide raho, Swiper init karo
+					initHeroSwiper();
+					return;
+				}
+
+				// sirf active sliders lo
+				var sliders = response.data.sliders.filter(function (s) { return s.isActive; });
+				if (!sliders.length) { initHeroSwiper(); return; }
+
+				// fallback slide hata do
+				$("#heroFallbackSlide").remove();
+
+				// har slider ke liye ek swiper-slide banao
+				var $wrapper = $("#heroSwiperWrapper");
+				sliders.forEach(function (s) {
+					var slide = [
+						'<div class="swiper-slide hero-slide">',
+						'  <div class="hero-slider-image">',
+						'    <img src="' + (s.image || "images/hero-bg.jpg") + '" alt="' + (s.heading || "ArchiVastu Consultants") + '">',
+						'  </div>',
+						'  <div class="container">',
+						'    <div class="row align-items-center">',
+						'      <div class="col-lg-10">',
+						'        <div class="hero-content">',
+						'          <div class="section-title">',
+						'            <h3>' + (s.title || "") + '</h3>',
+						'            <h1 data-cursor="-opaque">' + (s.heading || "") + '</h1>',
+						'            <p>' + (s.subHeading || "") + '</p>',
+						'          </div>',
+						'          <div class="hero-btn">',
+						'            <a href="about.html" class="btn-default">explore more</a>',
+						'            <a href="book-consultation.html" class="btn-default btn-highlighted">book a consultation</a>',
+						'          </div>',
+						'        </div>',
+						'      </div>',
+						'    </div>',
+						'  </div>',
+						'</div>'
+					].join("");
+					$wrapper.append(slide);
+				});
+
+				initHeroSwiper();
+			})
+			.catch(function (err) {
+				console.warn("Hero slider API failed, using static fallback.", err);
+				initHeroSwiper();
+			});
+	}
+
+	function initHeroSwiper() {
+		new Swiper("#heroSwiper", {
+			slidesPerView: 1,
+			speed: 1000,
+			spaceBetween: 0,
+			loop: true,
+			autoplay: {
+				delay: 4000,
+				disableOnInteraction: false,
+			},
+			pagination: {
+				el: ".hero-pagination",
+				clickable: true,
+			},
+		});
+	}
+	/* ── Hero Section End ── */
 
 	/* Animated Wow Js */
 	new WOW().init();
