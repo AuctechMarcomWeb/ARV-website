@@ -1,0 +1,43 @@
+/* Extra responsive safety patch — layered on top of custom.css, no overrides of existing design */
+
+/* Make embeds (Google Map etc.) always scale to their container on any device */
+iframe {
+  max-width: 100%;
+}
+
+/* Prevent long unbroken strings (emails, URLs, long headings) from causing
+   horizontal scroll on narrow phones */
+h1, h2, h3, h4, h5, h6, p, a {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Comfortable, accessible tap targets on touch devices */
+@media (max-width: 767px) {
+  .navbar-toggler,
+  .btn,
+  a.btn,
+  .slicknav_btn {
+    min-height: 44px;
+  }
+}
+
+/* Extra-small phones (< 375px) — tighten spacing so nothing overflows */
+@media only screen and (max-width: 360px) {
+  .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  h1 { font-size: 28px; }
+  h2 { font-size: 22px; }
+}
+
+/* Respect user motion preferences (accessibility + Core Web Vitals friendliness) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

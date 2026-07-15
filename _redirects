@@ -1,0 +1,35 @@
+# Netlify clean URL rewrites
+# 200 = rewrite (URL stays clean, no redirect)
+# Netlify processes top-to-bottom, first match wins.
+
+# ── Static HTML pages — must come FIRST ──
+/index.html                      /index.html                      200
+/about.html                      /about.html                      200
+/services.html                   /services.html                   200
+/portfolio.html                  /portfolio.html                  200
+/gallery.html                    /gallery.html                    200
+/blog.html                       /blog.html                       200
+/contact.html                    /contact.html                    200
+/book-consultation.html          /book-consultation.html          200
+/portfolio-detail.html           /portfolio-detail.html           200
+/blog-detail.html                /blog-detail.html                200
+/404.html                        /404.html                        200
+
+# ── Portfolio clean URLs (known slugs) ──
+/riverside-villa-interior-design          /portfolio-detail.html?slug=riverside-villa-interior-design          200
+/corporate-office-fitout-planning         /portfolio-detail.html?slug=corporate-office-fit-out-planning        200
+/corporate-office-fit-out-planning        /portfolio-detail.html?slug=corporate-office-fit-out-planning        200
+/vastu-aligned-home-renovation            /portfolio-detail.html?slug=vastu-aligned-home-renovation            200
+/boutique-hotel-interior-consultancy      /portfolio-detail.html?slug=boutique-hotel-interior-consultancy      200
+/residential-architectural-planning       /portfolio-detail.html?slug=residential-architectural-planning       200
+/luxury-apartment-interior-decor          /portfolio-detail.html?slug=luxury-apartment-interior-decor          200
+
+# ── Blog clean URLs (known slugs) ──
+/vastu-tips-for-modern-homes              /blog-detail.html?slug=vastu-tips-for-modern-homes                   200
+/interior-design-trends-2026              /blog-detail.html?slug=interior-design-trends-2026                   200
+/how-to-choose-the-right-architect        /blog-detail.html?slug=how-to-choose-the-right-architect             200
+/project-planning-checklist-for-renovation /blog-detail.html?slug=project-planning-checklist-for-renovation   200
+/vastu-vs-modern-design-finding-balance   /blog-detail.html?slug=vastu-vs-modern-design-finding-balance        200
+/small-space-interior-design-ideas        /blog-detail.html?slug=small-space-interior-design-ideas             200
+/importance-of-turmeric-in-indian-food    /blog-detail.html?slug=importance-of-turmeric-in-indian-food         200
+/why-choosing-quality-masalas-matters     /blog-detail.html?slug=why-choosing-quality-masalas-matters          200
