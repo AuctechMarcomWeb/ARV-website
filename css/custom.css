@@ -3348,6 +3348,59 @@ header.main-header .header-sticky.active .navbar{
 	object-fit: cover;
 }
 
+/* Gallery Pagination */
+.gallery-pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 0 40px;
+	flex-wrap: wrap;
+}
+
+.gallery-pagination .page-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 44px;
+	height: 44px;
+	padding: 0 14px;
+	background: var(--secondery-color);
+	color: var(--primary-color);
+	font-size: 15px;
+	font-weight: 600;
+	font-family: var(--default-font);
+	border: 2px solid transparent;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	line-height: 1;
+}
+
+.gallery-pagination .page-btn:hover {
+	background: var(--accent-color);
+	color: var(--white-color);
+	border-color: var(--accent-color);
+}
+
+.gallery-pagination .page-btn.active {
+	background: var(--accent-color);
+	color: var(--white-color);
+	border-color: var(--accent-color);
+}
+
+.gallery-pagination .page-btn:disabled,
+.gallery-pagination .page-btn[disabled] {
+	opacity: 0.35;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+.gallery-pagination .page-btn.prev-btn,
+.gallery-pagination .page-btn.next-btn {
+	font-size: 18px;
+	font-weight: 700;
+}
+
 /************************************/
 /***    	23. FAQs Page css 	  ***/
 /************************************/
@@ -5037,3 +5090,908 @@ header.main-header .header-sticky.active .navbar{
 		margin-bottom: 20px;
 	}
 }
+
+
+/* ============================================================
+   ARV — Comprehensive Responsive Audit Fixes
+   Added: comprehensive breakpoints for all screen sizes
+   DO NOT edit above this line
+   ============================================================ */
+
+/* ------------------------------------------------------------------
+   GLOBAL: ensure no horizontal scroll on any device
+   (overflow-x: clip is already set on html/body above,
+    but add hidden as a fallback for older browsers)
+------------------------------------------------------------------ */
+html,
+body {
+	overflow-x: hidden;
+}
+
+/* ================================================================
+   BREAKPOINT: max-width 1199px (large tablet / small laptop)
+================================================================ */
+@media only screen and (max-width: 1199px) {
+
+	/* Section titles scale down slightly */
+	.section-title h1 {
+		font-size: 64px;
+	}
+
+	.section-title h2 {
+		font-size: 40px;
+	}
+
+	/* Hero */
+	.hero,
+	.hero.hero-slider-layout .hero-slide {
+		padding: 160px 0 120px;
+	}
+
+	/* Page header */
+	.page-header {
+		padding: 160px 0 100px;
+	}
+
+	.page-header-box h1 {
+		font-size: 56px;
+	}
+
+	/* How we work — 3 per row at 1199 if 4 is too tight */
+	.how-we-work-item {
+		width: calc(33.33% - 20px);
+	}
+
+	/* About images — prevent overflow */
+	.about-us-images {
+		padding-right: 30px;
+	}
+
+	/* Why choose images — keep balanced */
+	.why-choose-images {
+		margin-left: 0;
+	}
+
+	/* Testimonial content padding */
+	.our-testimonial-content {
+		padding: 80px 40px;
+	}
+
+	/* Footer contact item text wrapping */
+	.footer-contact-content p {
+		font-size: 14px;
+	}
+
+	/* Container at 1199 */
+	.container {
+		max-width: 100%;
+		padding-right: 20px;
+		padding-left: 20px;
+	}
+}
+
+/* ================================================================
+   BREAKPOINT: max-width 991px (tablet) — supplement existing rules
+================================================================ */
+@media only screen and (max-width: 991px) {
+
+	/* Hero: ensure text doesn't overflow */
+	.hero-content .section-title h1 {
+		font-size: 42px;
+		word-break: break-word;
+	}
+
+	/* How we work — 2 per row already set, ensure gap */
+	.how-we-work-list {
+		gap: 30px;
+	}
+
+	/* Why choose images — single column below col-lg-7 */
+	.why-choose-images {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 15px;
+		margin-top: 30px;
+	}
+
+	.why-choose-img-box-1,
+	.why-choose-img-box-2 {
+		width: calc(50% - 7.5px);
+	}
+
+	/* Testimonial section — prevent content overflow */
+	.our-testimonial-content {
+		padding: 40px 20px;
+	}
+
+	/* About images — prevent overflow at tablet */
+	.about-us-images {
+		padding: 0 0 80px 0;
+		margin-bottom: 30px;
+	}
+
+	/* Experience counter at tablet */
+	.experience-counter {
+		right: 0;
+	}
+
+	/* Footer: all 4 columns are col-md-6 — that's fine at 991,
+	   but ensure spacing */
+	.footer-links {
+		margin-bottom: 30px;
+	}
+
+	/* Services grid — 2 per row via col-md-6 already, ensure images */
+	.service-image img {
+		width: 100%;
+		object-fit: cover;
+	}
+
+	/* Gallery items use dynamic classes — ensure spacing */
+	.page-gallery-box .photo-gallery {
+		margin-bottom: 20px;
+	}
+
+	/* Book consultation form */
+	.contact-us-page {
+		padding: 40px 0 !important;
+	}
+
+	/* Section row spacing */
+	.section-row {
+		margin-bottom: 40px;
+	}
+}
+
+/* ================================================================
+   BREAKPOINT: max-width 767px (mobile landscape) — supplement
+================================================================ */
+@media only screen and (max-width: 767px) {
+
+	/* Hero padding and text */
+	.hero,
+	.hero.hero-slider-layout .hero-slide {
+		padding: 150px 0 100px;
+	}
+
+	.hero-content .section-title h1 {
+		font-size: 32px;
+		word-break: break-word;
+		overflow-wrap: break-word;
+	}
+
+	.hero-content .section-title h3 {
+		font-size: 14px;
+	}
+
+	/* Ensure hero slider images don't cause H-scroll */
+	.hero-slide .hero-slider-image {
+		position: absolute;
+		inset: 0;
+		overflow: hidden;
+	}
+
+	.hero-slide .hero-slider-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
+
+	/* About images — proper stacking on mobile */
+	.about-us-images {
+		position: relative;
+		padding: 0 0 60px 0;
+		margin-bottom: 30px;
+		background-position: left 5px bottom 5px;
+		background-size: 15% auto;
+	}
+
+	.about-img-1 {
+		width: 65%;
+	}
+
+	.about-img-2 {
+		max-width: 200px;
+	}
+
+	/* Experience counter — prevent overflow */
+	.experience-counter {
+		height: 90px;
+		width: 90px;
+		bottom: 60px;
+	}
+
+	.experience-counter h3 {
+		font-size: 20px;
+	}
+
+	.experience-counter p {
+		font-size: 11px;
+		line-height: 1.2;
+	}
+
+	/* Why choose images — stack to single column */
+	.why-choose-images {
+		margin-top: 20px;
+	}
+
+	.why-choose-img-box-1,
+	.why-choose-img-box-2 {
+		display: flex;
+		gap: 10px;
+	}
+
+	.why-choose-img-1,
+	.why-choose-img-2,
+	.why-choose-img-3,
+	.why-choose-img-4 {
+		width: 50%;
+	}
+
+	/* Services — 1 col on mobile (col-md-6 → full width) */
+	/* Bootstrap handles col-md-6 at 768+, below that it's 100% */
+
+	/* How we work list — items are already 100% width at 767px,
+	   ensure the list doesn't create h-scroll */
+	.how-we-work-list {
+		flex-direction: column;
+		gap: 25px;
+	}
+
+	/* Testimonial slider — full width */
+	.testimonial-slider {
+		width: 100%;
+		max-width: 100%;
+		overflow: hidden;
+	}
+
+	.testimonial-item {
+		padding: 0;
+	}
+
+	/* Testimonial rating counter — stack on mobile */
+	.testimonial-rating-counter {
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.testimonial-rating-counter .rating-counter h2 {
+		font-size: 32px;
+	}
+
+	/* Footer header — logo and social stack */
+	.footer-header .row {
+		flex-direction: column;
+		gap: 15px;
+	}
+
+	.footer-header .col-md-6 {
+		width: 100%;
+	}
+
+	.footer-social-links {
+		margin-top: 10px;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+		gap: 15px;
+	}
+
+	/* Book consultation form spacing */
+	.contact-us-page {
+		padding: 40px 0 !important;
+	}
+
+	#bookingForm .form-group {
+		margin-bottom: 16px;
+	}
+
+	/* Page sections reduce padding */
+	.about-us,
+	.why-choose-us,
+	.our-services,
+	.how-we-work,
+	.our-skill,
+	.our-blog {
+		padding: 40px 0;
+	}
+
+	/* Gallery items on mobile — ensure 2 per row */
+	#galleryRow > [class*="col-"] {
+		flex: 0 0 50%;
+		max-width: 50%;
+	}
+
+	/* Portfolio items on mobile — 1 per row */
+	.page-project .col-lg-6,
+	.page-project .col-md-6 {
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
+
+	/* Contact info box — stack */
+	.contact-info-box {
+		flex-direction: column;
+	}
+
+	.contact-info-item {
+		width: 100% !important;
+	}
+}
+
+/* ================================================================
+   BREAKPOINT: max-width 575px (mobile portrait)
+   Supplement existing 576px rules
+================================================================ */
+@media only screen and (max-width: 575px) {
+
+	/* GLOBAL: prevent any element causing h-scroll */
+	* {
+		max-width: 100%;
+	}
+
+	img,
+	figure,
+	video,
+	iframe {
+		max-width: 100%;
+		height: auto;
+	}
+
+	/* Hero — tighter padding */
+	.hero,
+	.hero.hero-slider-layout .hero-slide {
+		padding: 130px 0 80px;
+		margin-top: -92px;
+	}
+
+	.hero-content .section-title h1 {
+		font-size: 26px;
+		line-height: 1.2;
+		word-break: break-word;
+		overflow-wrap: break-word;
+	}
+
+	.hero-content .section-title h3 {
+		font-size: 13px;
+	}
+
+	.hero-content .section-title p {
+		font-size: 14px;
+		line-height: 1.5;
+	}
+
+	.hero-btn {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 10px;
+	}
+
+	.hero-content .btn-default,
+	.hero-content .btn-default.btn-highlighted {
+		margin: 0 !important;
+	}
+
+	/* Section titles */
+	.section-title h1 {
+		font-size: 22px;
+		letter-spacing: 0;
+	}
+
+	.section-title h2 {
+		font-size: 20px;
+		letter-spacing: 0;
+	}
+
+	.section-title h3 {
+		font-size: 13px;
+		margin-bottom: 8px;
+	}
+
+	/* Page header */
+	.page-header {
+		padding: 120px 0 60px;
+		margin-top: -92px;
+	}
+
+	.page-header-box h1 {
+		font-size: 22px;
+		word-break: break-word;
+	}
+
+	/* About images — force stack */
+	.about-us-images {
+		padding: 0 0 50px 0;
+		margin-bottom: 20px;
+		overflow: visible;
+	}
+
+	.about-img-1 {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.about-img-2 {
+		max-width: 160px;
+		position: absolute;
+		right: 0;
+		bottom: 10px;
+	}
+
+	.experience-counter {
+		height: 80px;
+		width: 80px;
+		bottom: 10px;
+		right: 5px;
+	}
+
+	.experience-counter h3 {
+		font-size: 18px;
+	}
+
+	.experience-counter p {
+		font-size: 10px;
+		line-height: 1.1;
+	}
+
+	/* Feedback counter */
+	.feedback-counter {
+		bottom: 55px;
+		left: 5px;
+	}
+
+	/* Why choose images — single column stack */
+	.why-choose-images {
+		display: block;
+		margin-top: 20px;
+	}
+
+	.why-choose-img-box-1,
+	.why-choose-img-box-2 {
+		display: flex;
+		gap: 8px;
+		margin-bottom: 8px;
+		width: 100%;
+	}
+
+	.why-choose-img-1,
+	.why-choose-img-2,
+	.why-choose-img-3,
+	.why-choose-img-4 {
+		width: 50%;
+	}
+
+	.why-choose-img-2 img,
+	.why-choose-img-4 img {
+		aspect-ratio: 1 / 1 !important;
+	}
+
+	/* Services grid — 1 column */
+	.our-services .col-lg-4,
+	.our-services .col-md-6,
+	.page-services .col-lg-4,
+	.page-services .col-md-6 {
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
+
+	.service-image img {
+		aspect-ratio: 1 / 0.65 !important;
+	}
+
+	/* Portfolio grid — 1 column on small mobile */
+	#projectGrid > [class*="col-"],
+	.page-project [class*="col-lg-6"],
+	.page-project [class*="col-md-6"] {
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
+
+	/* Gallery — 2 columns on 575px, 1 on very small */
+	#galleryRow > [class*="col-"] {
+		flex: 0 0 50%;
+		max-width: 50%;
+	}
+
+	/* How we work */
+	.how-we-work-list {
+		gap: 20px;
+	}
+
+	.how-we-work-item {
+		width: 100% !important;
+		padding: 0;
+	}
+
+	.how-we-work-content h3 {
+		font-size: 16px;
+	}
+
+	.how-we-work-content p {
+		font-size: 14px;
+	}
+
+	/* Testimonial */
+	.our-testimonial-content {
+		padding: 30px 15px;
+	}
+
+	.testimonial-slider {
+		max-width: 100%;
+		overflow: hidden;
+	}
+
+	.testimonial-content p {
+		font-size: 14px;
+	}
+
+	.testimonial-body .author-content h3 {
+		font-size: 16px;
+	}
+
+	.testimonial-rating-counter .rating-counter h2 {
+		font-size: 30px;
+	}
+
+	/* Blog */
+	.post-item-content h3 {
+		font-size: 16px;
+	}
+
+	/* Footer columns — force all 4 col-md-6 to full width */
+	.main-footer .col-md-6,
+	.main-footer .col-lg-3 {
+		flex: 0 0 100% !important;
+		max-width: 100% !important;
+	}
+
+	.footer-links {
+		margin-bottom: 25px;
+		padding-right: 0;
+	}
+
+	.footer-header .col-md-6 {
+		flex: 0 0 100% !important;
+		max-width: 100% !important;
+	}
+
+	.footer-social-links {
+		justify-content: flex-start;
+		flex-wrap: wrap;
+		gap: 12px;
+		margin-top: 10px;
+	}
+
+	.footer-newsletter-form p {
+		font-size: 14px;
+		margin-bottom: 15px;
+	}
+
+	.footer-copyright-text p {
+		font-size: 13px;
+		text-align: center;
+	}
+
+	/* Contact info items */
+	.contact-info-box {
+		flex-direction: column;
+		gap: 15px;
+	}
+
+	.contact-info-item {
+		width: 100% !important;
+		flex: 0 0 100%;
+	}
+
+	/* Contact form */
+	.contact-form .form-control {
+		padding: 10px 12px;
+		font-size: 14px;
+	}
+
+	.contact-us-form {
+		margin-left: 0;
+	}
+
+	/* Book consultation form */
+	.contact-us-page {
+		padding: 30px 0 !important;
+	}
+
+	#bookingForm .col-md-6,
+	#bookingForm .col-md-12 {
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
+
+	#bookingForm .form-control {
+		font-size: 14px;
+		padding: 10px 12px;
+	}
+
+	#bookingForm select.form-control {
+		font-size: 14px;
+	}
+
+	.contact-form-box {
+		padding: 0;
+	}
+
+	/* Vision/mission items */
+	.vision-mission-item {
+		width: 100% !important;
+	}
+
+	/* About facility */
+	.about-facility-item {
+		width: 100% !important;
+	}
+
+	/* FAQ accordion */
+	.faq-accordion .accordion-header .accordion-button {
+		font-size: 16px;
+		padding-right: 30px;
+		padding-left: 15px;
+	}
+
+	/* Project gallery thumbnails — 2 col */
+	.project-gallery-images {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 10px;
+	}
+
+	.project-gallery-img {
+		width: 100% !important;
+	}
+
+	/* Google map */
+	.google-map-iframe,
+	.google-map-iframe iframe {
+		height: 250px;
+	}
+
+	/* Blog single post */
+	.post-entry h2 {
+		font-size: 20px;
+	}
+
+	.post-entry blockquote p {
+		font-size: 15px;
+	}
+
+	/* Buttons */
+	.btn-default {
+		font-size: 14px;
+		padding: 14px 40px 14px 16px;
+	}
+
+	/* Error page */
+	.error-page-image img {
+		max-width: 100%;
+	}
+}
+
+/* ================================================================
+   BREAKPOINT: max-width 374px (iPhone SE, small mobiles 320px)
+   Supplement existing 375px rules
+================================================================ */
+@media only screen and (max-width: 374px) {
+
+	/* Absolutely prevent any horizontal overflow */
+	html, body {
+		overflow-x: hidden !important;
+		width: 100% !important;
+	}
+
+	/* Hero — smallest screens */
+	.hero,
+	.hero.hero-slider-layout .hero-slide {
+		padding: 100px 0 60px;
+		margin-top: -92px;
+	}
+
+	.hero-content .section-title h1 {
+		font-size: 22px;
+		line-height: 1.2;
+		letter-spacing: 0;
+	}
+
+	.hero-content .section-title h3 {
+		font-size: 12px;
+	}
+
+	.hero-content .section-title p {
+		font-size: 13px;
+	}
+
+	/* Section titles */
+	.section-title h1 {
+		font-size: 20px;
+	}
+
+	.section-title h2 {
+		font-size: 18px;
+	}
+
+	.section-title h3 {
+		font-size: 12px;
+	}
+
+	/* Page header */
+	.page-header {
+		padding: 100px 0 50px;
+	}
+
+	.page-header-box h1 {
+		font-size: 19px;
+	}
+
+	.page-header-box ol li.breadcrumb-item {
+		font-size: 13px;
+	}
+
+	/* About images — fully stacked at 320px */
+	.about-us-images {
+		padding: 0 0 40px 0;
+	}
+
+	.about-img-1 {
+		width: 100%;
+	}
+
+	.about-img-2 {
+		max-width: 130px;
+		right: 0;
+		bottom: 5px;
+	}
+
+	.experience-counter {
+		height: 70px;
+		width: 70px;
+	}
+
+	.experience-counter h3 {
+		font-size: 15px;
+	}
+
+	.experience-counter p {
+		font-size: 9px;
+	}
+
+	.feedback-counter p {
+		height: 30px;
+		width: 30px;
+		font-size: 10px;
+		margin: 0 0 4px 0;
+	}
+
+	.feedback-counter h3 {
+		font-size: 10px;
+	}
+
+	/* Why choose — images 2-col compact */
+	.why-choose-img-box-1,
+	.why-choose-img-box-2 {
+		gap: 5px;
+		margin-bottom: 5px;
+	}
+
+	/* Gallery — 1 column on very small screens */
+	#galleryRow > [class*="col-"] {
+		flex: 0 0 100% !important;
+		max-width: 100% !important;
+	}
+
+	/* Services — 1 column */
+	.our-services .col-lg-4,
+	.our-services .col-md-6 {
+		flex: 0 0 100% !important;
+		max-width: 100% !important;
+	}
+
+	/* Footer columns */
+	.main-footer .col-md-6,
+	.main-footer .col-lg-3 {
+		flex: 0 0 100% !important;
+		max-width: 100% !important;
+	}
+
+	/* Book form */
+	#bookingForm .col-md-6 {
+		flex: 0 0 100% !important;
+		max-width: 100% !important;
+	}
+
+	#bookingForm .form-control {
+		font-size: 13px;
+		padding: 9px 10px;
+	}
+
+	/* Testimonial */
+	.our-testimonial-content {
+		padding: 20px 10px;
+	}
+
+	.testimonial-content p {
+		font-size: 13px;
+	}
+
+	.testimonial-rating-counter .rating-counter h2 {
+		font-size: 26px;
+	}
+
+	/* How we work */
+	.how-we-work-content h3 {
+		font-size: 15px;
+	}
+
+	.how-we-work-item .icon-box img {
+		max-width: 40px;
+	}
+
+	/* Buttons */
+	.btn-default {
+		font-size: 13px;
+		padding: 12px 36px 12px 12px;
+	}
+
+	/* Container padding on tiny screens */
+	.container {
+		padding-right: 12px;
+		padding-left: 12px;
+	}
+
+	.row {
+		margin-right: -12px;
+		margin-left: -12px;
+	}
+
+	.row > * {
+		padding-right: 12px;
+		padding-left: 12px;
+	}
+
+	/* Accordion */
+	.faq-accordion .accordion-header .accordion-button {
+		font-size: 14px;
+	}
+
+	/* Blog post entry */
+	.post-entry h2 {
+		font-size: 18px;
+	}
+
+	/* Project entry */
+	.project-entry h2 {
+		font-size: 18px;
+	}
+
+	/* Google map */
+	.google-map-iframe,
+	.google-map-iframe iframe {
+		height: 200px;
+	}
+
+	/* Contact info */
+	.contact-info-content h3 {
+		font-size: 15px;
+	}
+
+	.contact-info-content p {
+		font-size: 13px;
+	}
+
+	/* Error page */
+	.error-page-image img {
+		max-width: 100%;
+	}
+
+	/* Project gallery thumbnails — 1 col on 374px */
+	.project-gallery-images {
+		grid-template-columns: 1fr;
+	}
+}
+/* ============================================================
+   END OF ARV RESPONSIVE AUDIT FIXES
+   ============================================================ */

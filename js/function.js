@@ -276,44 +276,105 @@
 				var items = response.data.gallery.filter(function (g) { return g.isActive; });
 				if (!items.length) return;
 
-				var $row = $("#galleryRow");
-				$row.empty();
-
-				items.forEach(function (item, index) {
-					var delay = (index % 3) * 0.2;
+				// Flatten all image URLs into a single array
+				var allImages = [];
+				items.forEach(function (item) {
 					var altText = item.title || "ArchiVastu Consultants Gallery";
-					var col = [
-						'<div class="col-lg-4 col-md-6">',
-						'  <div class="photo-gallery wow fadeInUp" data-wow-delay="' + delay + 's">',
-						'    <a href="' + item.url + '" data-cursor-text="View">',
-						'      <figure>',
-						'        <img src="' + item.url + '" alt="' + altText + '">',
-						'      </figure>',
-						'    </a>',
-						'  </div>',
-						'</div>'
-					].join("");
-					$row.append(col);
+					var urls = Array.isArray(item.url) ? item.url : [item.url];
+					urls.forEach(function (imgUrl) {
+						if (!imgUrl || !imgUrl.startsWith("http")) return;
+						allImages.push({ src: imgUrl, alt: altText });
+					});
 				});
 
-				// Magnific Popup reinit after dynamic inject
-				$('.gallery-items').magnificPopup({
-					delegate: 'a',
-					type: 'image',
-					closeOnContentClick: false,
-					closeBtnInside: false,
-					mainClass: 'mfp-with-zoom',
-					image: { verticalFit: true },
-					gallery: { enabled: true },
-					zoom: {
-						enabled: true,
-						duration: 300,
-						opener: function (element) { return element.find('img'); }
+				if (!allImages.length) return;
+
+				var ITEMS_PER_PAGE = 12;
+				var currentPage = 1;
+				var totalPages = Math.ceil(allImages.length / ITEMS_PER_PAGE);
+
+				var $row = $("#galleryRow");
+				var $paginationWrap = $("#galleryPagination");
+
+				function renderPage(page) {
+					currentPage = page;
+					$row.empty();
+
+					var start = (page - 1) * ITEMS_PER_PAGE;
+					var end   = Math.min(start + ITEMS_PER_PAGE, allImages.length);
+					var pageImages = allImages.slice(start, end);
+
+					pageImages.forEach(function (img, i) {
+						var delay = (i % 3) * 0.2;
+						var col = [
+							'<div class="col-lg-4 col-md-6">',
+							'  <div class="photo-gallery wow fadeInUp" data-wow-delay="' + delay + 's">',
+							'    <a href="' + img.src + '" data-cursor-text="View">',
+							'      <figure>',
+							'        <img src="' + img.src + '" alt="' + img.alt + '">',
+							'      </figure>',
+							'    </a>',
+							'  </div>',
+							'</div>'
+						].join("");
+						$row.append(col);
+					});
+
+					// Reinit Magnific Popup for fresh DOM nodes
+					$('.gallery-items').magnificPopup({
+						delegate: 'a',
+						type: 'image',
+						closeOnContentClick: false,
+						closeBtnInside: false,
+						mainClass: 'mfp-with-zoom',
+						image: { verticalFit: true },
+						gallery: { enabled: true },
+						zoom: {
+							enabled: true,
+							duration: 300,
+							opener: function (element) { return element.find('img'); }
+						}
+					});
+
+					new WOW().init();
+					renderPagination();
+
+					// Scroll to gallery top on page change (not on first load)
+					if (page > 1 || arguments[1] === true) {
+						$('html, body').animate({ scrollTop: $(".page-gallery").offset().top - 100 }, 400);
 					}
-				});
+				}
 
-				// WOW reinit for new elements
-				new WOW().init();
+				function renderPagination() {
+					$paginationWrap.empty();
+
+					if (totalPages <= 1) return;
+
+					// Prev button
+					var $prev = $('<button class="page-btn prev-btn" aria-label="Previous page">&lsaquo;</button>');
+					if (currentPage === 1) $prev.attr('disabled', true);
+					$prev.on('click', function () { renderPage(currentPage - 1, true); });
+					$paginationWrap.append($prev);
+
+					// Page number buttons
+					for (var p = 1; p <= totalPages; p++) {
+						(function (pageNum) {
+							var $btn = $('<button class="page-btn" aria-label="Page ' + pageNum + '">' + pageNum + '</button>');
+							if (pageNum === currentPage) $btn.addClass('active');
+							$btn.on('click', function () { renderPage(pageNum, true); });
+							$paginationWrap.append($btn);
+						})(p);
+					}
+
+					// Next button
+					var $next = $('<button class="page-btn next-btn" aria-label="Next page">&rsaquo;</button>');
+					if (currentPage === totalPages) $next.attr('disabled', true);
+					$next.on('click', function () { renderPage(currentPage + 1, true); });
+					$paginationWrap.append($next);
+				}
+
+				// First render
+				renderPage(1);
 			})
 			.catch(function (err) {
 				console.warn("Gallery load failed.", err);
