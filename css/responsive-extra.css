@@ -41,3 +41,146 @@ h1, h2, h3, h4, h5, h6, p, a {
     scroll-behavior: auto !important;
   }
 }
+
+/* Home slider pagination dots — slightly smaller */
+.hero.hero-slider-layout .hero-pagination .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  margin: 0 4px;
+}
+
+/* The slider never scrolls sideways and the image never spills out
+   of its box on any device */
+.hero.hero-slider-layout,
+#heroSwiper,
+#heroSwiper .swiper-wrapper,
+#heroSwiper .swiper-slide {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Belt-and-suspenders: image always fully fills + covers its slide,
+   never distorted, on every screen size */
+.hero.hero-slider-layout .hero-slide .hero-slider-image,
+.hero.hero-slider-layout .hero-slide .hero-slider-image img {
+  width: 100%;
+  height: 100%;
+}
+
+.hero.hero-slider-layout .hero-slide .hero-slider-image img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ============================================================
+   ONE CONSISTENT HERO DESIGN ON ALL DEVICES
+   ------------------------------------------------------------
+   Problem: the old rules sized the hero from the viewport HEIGHT
+   (100vh / 78vh / 72vh / 68vh at different breakpoints), so every
+   phone showed a different banner height and a different crop of
+   the photo. Font sizes also changed across 3 phone breakpoints.
+
+   Fix: on phones, the hero height is derived from the viewport
+   WIDTH (a fixed proportion), so the banner shape, image crop and
+   layout are identical on every phone regardless of screen height.
+   One single set of type sizes applies to all phones. Desktop and
+   large tablets keep the original full-screen design.
+   ============================================================ */
+
+/* Desktop / large tablet — unchanged full-height banner */
+@media only screen and (min-width: 992px) {
+	.hero,
+	.hero.hero-slider-layout .hero-slide {
+		min-height: 100vh;
+	}
+}
+
+/* Small tablets (768–991px) — fixed proportional banner */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.hero,
+	.hero.hero-slider-layout .hero-slide {
+		min-height: min(calc(100vw * 0.85), 860px);
+		padding: 150px 0 90px;
+	}
+}
+
+/* ALL phones (up to 767px) — one identical design */
+@media only screen and (max-width: 767px) {
+	.hero,
+	.hero.hero-slider-layout .hero-slide {
+		/* Height = 120% of screen width -> same banner shape and
+		   same photo crop on every phone, tall or short screen */
+		min-height: min(calc(100vw * 1.2), 700px);
+		padding: 110px 0 70px;
+		display: flex;
+		align-items: center;
+	}
+
+	.hero .container {
+		width: 100%;
+	}
+
+	/* One fixed crop of the photo on every phone */
+	.hero.hero-slider-layout .hero-slide .hero-slider-image img {
+		object-fit: cover;
+		object-position: center center;
+	}
+
+	/* One set of type sizes for ALL phones — overrides the old
+	   767px / 576px / 375px tiers in custom.css */
+	.hero-content .section-title h1 {
+		font-size: 30px !important;
+		line-height: 1.25;
+	}
+
+	.hero-content .section-title h3 {
+		font-size: 13px !important;
+		letter-spacing: 1px;
+	}
+
+	.hero-content .section-title p {
+		font-size: 16px !important;
+		line-height: 1.6;
+		max-width: 480px;
+	}
+
+	/* Buttons: identical size and stacking on every phone */
+	.hero-btn {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 12px;
+		width: auto;
+	}
+
+	.hero-content .btn-default,
+	.hero-content .btn-default.btn-highlighted {
+		margin: 0 !important;
+		font-size: 14px !important;
+		padding: 14px 38px 14px 18px !important;
+		width: auto !important;
+		text-align: left;
+	}
+
+	/* Pagination dots: same position on every phone */
+	.hero.hero-slider-layout .hero-pagination {
+		bottom: 22px;
+		padding-left: 15px;
+	}
+}
+
+/* Short/landscape phones — let the box size to its content so the
+   heading, paragraph and buttons never get squashed together */
+@media only screen and (max-height: 500px) and (orientation: landscape) {
+	.hero,
+	.hero.hero-slider-layout .hero-slide {
+		min-height: auto;
+		max-height: none;
+		padding: 110px 0 50px;
+	}
+
+	.hero-content .section-title p {
+		margin-bottom: 10px;
+	}
+}
+

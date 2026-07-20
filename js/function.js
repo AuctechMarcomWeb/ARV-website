@@ -815,40 +815,71 @@
 				var sliders = response.data.sliders.filter(function (s) { return s.isActive; });
 				if (!sliders.length) { initHeroSwiper(); return; }
 
-				// fallback slide hata do
-				$("#heroFallbackSlide").remove();
-
-				// har slider ke liye ek swiper-slide banao
-				var $wrapper = $("#heroSwiperWrapper");
-				sliders.forEach(function (s) {
-					var slide = [
-						'<div class="swiper-slide hero-slide">',
-						'  <div class="hero-slider-image">',
-						'    <img src="' + (s.image || "images/hero-bg.jpg") + '" alt="' + (s.heading || "ArchiVastu Consultants") + '">',
-						'  </div>',
-						'  <div class="container">',
-						'    <div class="row align-items-center">',
-						'      <div class="col-lg-10">',
-						'        <div class="hero-content">',
-						'          <div class="section-title">',
-						'            <h3>' + (s.title || "") + '</h3>',
-						'            <h1 data-cursor="-opaque">' + (s.heading || "") + '</h1>',
-						'            <p>' + (s.subHeading || "") + '</p>',
-						'          </div>',
-						'          <div class="hero-btn">',
-						'            <a href="about.html" class="btn-default">explore more</a>',
-						'            <a href="book-consultation.html" class="btn-default btn-highlighted">book a consultation</a>',
-						'          </div>',
-						'        </div>',
-						'      </div>',
-						'    </div>',
-						'  </div>',
-						'</div>'
-					].join("");
-					$wrapper.append(slide);
+				// Har slide ki image pehle background me preload/verify karo.
+				// Jab tak koi image confirm nahi ho jaati (load ho gayi ya fail
+				// hoke fallback pe tay ho gayi), tab tak purani fallback slides
+				// screen pe dikhti rahengi — isse slide badalte waqt kabhi bhi
+				// blank/hidden frame nahi dikhega.
+				var preloadPromises = sliders.map(function (s) {
+					var candidateUrl = (s.image && /^https?:\/\//i.test(s.image)) ? s.image : null;
+					if (!candidateUrl) {
+						return Promise.resolve({ url: "images/hero-bg.jpg", ok: false });
+					}
+					return new Promise(function (resolve) {
+						var testImg = new Image();
+						testImg.onload = function () { resolve({ url: candidateUrl, ok: true }); };
+						testImg.onerror = function () { resolve({ url: "images/hero-bg.jpg", ok: false }); };
+						testImg.src = candidateUrl;
+					});
 				});
 
-				initHeroSwiper();
+				Promise.all(preloadPromises).then(function (results) {
+					// Agar backend ki EK bhi image load nahi ho paayi, to bharosemand
+					// local fallback slides (hero-bg.jpg + hero-bg-2.jpg) hi rehne do —
+					// aadha-tootha backend data dikhane se behtar hai.
+					var allOk = results.every(function (r) { return r.ok; });
+					if (!allOk) {
+						console.warn("Hero slider: kuch backend images load nahi hui, local fallback slides use ho rahi hain.");
+						initHeroSwiper();
+						return;
+					}
+
+					// Sab images sahi se load ho gayi — ab local fallback slides hata
+					// kar backend se aaya asli content dikhao.
+					$(".hero-fallback-slide").remove();
+
+					var $wrapper = $("#heroSwiperWrapper");
+					sliders.forEach(function (s, i) {
+						var imgUrl = results[i].url;
+						var slide = [
+							'<div class="swiper-slide hero-slide">',
+							'  <div class="hero-slider-image">',
+							'    <img src="' + imgUrl + '" alt="' + (s.heading || "ArchiVastu Consultants") + '" onerror="this.onerror=null;this.src=\'images/hero-bg.jpg\';">',
+							'  </div>',
+							'  <div class="container">',
+							'    <div class="row align-items-center">',
+							'      <div class="col-lg-10">',
+							'        <div class="hero-content">',
+							'          <div class="section-title">',
+							'            <h3>' + (s.title || "") + '</h3>',
+							'            <h1 data-cursor="-opaque">' + (s.heading || "") + '</h1>',
+							'            <p>' + (s.subHeading || "") + '</p>',
+							'          </div>',
+							'          <div class="hero-btn">',
+							'            <a href="about.html" class="btn-default">explore more</a>',
+							'            <a href="book-consultation.html" class="btn-default btn-highlighted">book a consultation</a>',
+							'          </div>',
+							'        </div>',
+							'      </div>',
+							'    </div>',
+							'  </div>',
+							'</div>'
+						].join("");
+						$wrapper.append(slide);
+					});
+
+					initHeroSwiper();
+				});
 			})
 			.catch(function (err) {
 				console.warn("Hero slider API failed, using static fallback.", err);
@@ -859,9 +890,11 @@
 	function initHeroSwiper() {
 		new Swiper("#heroSwiper", {
 			slidesPerView: 1,
-			speed: 1000,
+			effect: "fade", // sliding/flip motion hata di — ab dono images seedhe simple crossfade se badalti hain
+			fadeEffect: { crossFade: true },
+			speed: 700,
 			spaceBetween: 0,
-			loop: true,
+			rewind: true, // loop ki jagah rewind — last slide ke baad seedha pehli slide pe wapas, chahe kitni bhi slides hon (1, 2, ya zyada), kabhi atakta ya blank nahi hota
 			autoplay: {
 				delay: 4000,
 				disableOnInteraction: false,
