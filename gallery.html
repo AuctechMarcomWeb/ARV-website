@@ -164,6 +164,24 @@
 </div>
 </div>
 <!-- Page Header End -->
+ <!-- Gallery Filter -->
+<div class="arv-gallery-tabs text-center mb-5">
+
+    <button
+        type="button"
+        class="arv-gallery-tab active"
+        data-gallery-type="image">
+        Images
+    </button>
+
+    <button
+        type="button"
+        class="arv-gallery-tab"
+        data-gallery-type="video">
+        Videos
+    </button>
+
+</div>
 <!-- Page Gallery Section Start -->
 <div class="page-gallery">
 <div class="container">
@@ -180,6 +198,32 @@
 </div>
 </div>
 <!-- Page Gallery Section End -->
+ <!-- ================= VIDEO GALLERY ================= -->
+<div
+    class="arv-video-gallery"
+    id="arvVideoGallery"
+    style="display:none;">
+
+    <div class="container">
+
+        <div class="row" id="arvVideoGalleryRow">
+        </div>
+
+        <div
+            class="arv-video-empty"
+            id="arvVideoGalleryEmpty"
+            style="display:none;">
+
+            <h3>No Videos Available</h3>
+
+            <p>
+                There are currently no videos in the gallery.
+            </p>
+
+        </div>
+
+    </div>
+</div>
 <!-- Footer Start -->
 <footer class="main-footer">
 <div class="container">
@@ -335,5 +379,351 @@
 <script src="js/function.js"></script>
 <!-- Portfolio download modal -->
 <script src="js/portfolio-download-modal.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const imageGallery =
+        document.querySelector(".page-gallery");
+
+    const videoGallery =
+        document.getElementById("arvVideoGallery");
+
+    const videoGalleryRow =
+        document.getElementById("arvVideoGalleryRow");
+
+    const videoGalleryEmpty =
+        document.getElementById("arvVideoGalleryEmpty");
+
+    const galleryTabs =
+        document.querySelectorAll(".arv-gallery-tab");
+
+
+    let galleryLoaded = false;
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | TAB SWITCH
+    |--------------------------------------------------------------------------
+    */
+
+    galleryTabs.forEach(function (tab) {
+
+        tab.addEventListener("click", function () {
+
+            galleryTabs.forEach(function (item) {
+                item.classList.remove("active");
+            });
+
+            this.classList.add("active");
+
+            const type =
+                this.getAttribute("data-gallery-type");
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | IMAGES
+            |--------------------------------------------------------------------------
+            */
+
+            if (type === "image") {
+
+                if (imageGallery) {
+                    imageGallery.style.display = "";
+                }
+
+                if (videoGallery) {
+                    videoGallery.style.display = "none";
+                }
+
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | VIDEOS
+            |--------------------------------------------------------------------------
+            */
+
+            if (type === "video") {
+
+                if (imageGallery) {
+                    imageGallery.style.display = "none";
+                }
+
+                if (videoGallery) {
+                    videoGallery.style.display = "block";
+                }
+
+                if (!galleryLoaded) {
+                    loadVideos();
+                }
+
+            }
+
+        });
+
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | LOAD VIDEOS
+    |--------------------------------------------------------------------------
+    */
+
+    async function loadVideos() {
+
+        try {
+
+            videoGalleryRow.innerHTML = `
+                <div class="col-12">
+                    <div class="arv-video-loading">
+                        Loading videos...
+                    </div>
+                </div>
+            `;
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | YOUR EXISTING API
+            |--------------------------------------------------------------------------
+            */
+
+            const response =
+                await ARV_API.getGallery();
+
+            const result =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    result.message ||
+                    "Failed to load gallery"
+                );
+
+            }
+
+
+            const galleries =
+                result?.data?.gallery || [];
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | EXTRACT VIDEOS
+            |--------------------------------------------------------------------------
+            */
+
+            const videos = [];
+
+
+            galleries
+                .filter(function (gallery) {
+
+                    return gallery.isActive !== false;
+
+                })
+                .forEach(function (gallery) {
+
+                    /*
+                    | New media structure
+                    */
+
+                    if (
+                        Array.isArray(
+                            gallery.media
+                        )
+                    ) {
+
+                        gallery.media.forEach(
+                            function (media) {
+
+                                if (
+                                    media &&
+                                    media.type === "video" &&
+                                    media.url
+                                ) {
+
+                                    videos.push({
+
+                                        url: media.url,
+
+                                        thumbnail:
+                                            media.thumbnail || "",
+
+                                        title:
+                                            gallery.title || ""
+
+                                    });
+
+                                }
+
+                            }
+                        );
+
+                    }
+
+                });
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | NO VIDEOS
+            |--------------------------------------------------------------------------
+            */
+
+            if (videos.length === 0) {
+
+                videoGalleryRow.innerHTML = "";
+
+                videoGalleryEmpty.style.display =
+                    "block";
+
+                return;
+
+            }
+
+
+            videoGalleryEmpty.style.display =
+                "none";
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | CREATE VIDEO CARDS
+            |--------------------------------------------------------------------------
+            */
+
+            videoGalleryRow.innerHTML = "";
+
+
+            videos.forEach(function (item) {
+
+                const col =
+                    document.createElement("div");
+
+
+                col.className =
+                    "col-lg-4 col-md-6 col-sm-12 mb-4";
+
+
+                const card =
+                    document.createElement("div");
+
+                card.className =
+                    "arv-video-card";
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | VIDEO WRAPPER
+                |--------------------------------------------------------------------------
+                */
+
+                const wrapper =
+                    document.createElement("div");
+
+                wrapper.className =
+                    "arv-video-wrapper";
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | VIDEO
+                |--------------------------------------------------------------------------
+                */
+
+                const video =
+                    document.createElement("video");
+
+                video.className =
+                    "arv-video-player";
+
+                video.controls = true;
+
+                video.preload = "metadata";
+
+                video.playsInline = true;
+
+
+                if (item.thumbnail) {
+
+                    video.poster =
+                        item.thumbnail;
+
+                }
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | SOURCE
+                |--------------------------------------------------------------------------
+                */
+
+                const source =
+                    document.createElement("source");
+
+                source.src =
+                    item.url;
+
+                source.type =
+                    "video/mp4";
+
+
+                video.appendChild(source);
+
+                wrapper.appendChild(video);
+
+                card.appendChild(wrapper);
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | TITLE
+                |--------------------------------------------------------------------------
+                */
+
+             
+
+
+                col.appendChild(card);
+
+                videoGalleryRow.appendChild(col);
+
+            });
+
+
+            galleryLoaded = true;
+
+
+        } catch (error) {
+
+            console.error(
+                "Video Gallery Error:",
+                error
+            );
+
+
+            videoGalleryRow.innerHTML = "";
+
+            videoGalleryEmpty.style.display =
+                "block";
+
+            videoGalleryEmpty.innerHTML = `
+                <h3>Unable to load videos</h3>
+                <p>Please try again later.</p>
+            `;
+
+        }
+
+    }
+
+});
+</script>
 </body>
 </html>

@@ -5068,3 +5068,249 @@ header.main-header .header-sticky.active .navbar{
 		margin-bottom: 20px;
 	}
 }
+/* =====================================================
+   VIDEO GALLERY ONLY
+   Does NOT modify existing image gallery
+===================================================== */
+
+.arv-video-gallery {
+    width: 100%;
+}
+
+.arv-video-card {
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 10px;
+    transition: all 0.35s ease;
+}
+
+.arv-video-card:hover {
+    transform: translateY(-5px);
+}
+
+.arv-video-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #000;
+}
+
+.arv-video-player {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.arv-video-title {
+    padding: 12px 10px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.arv-video-loading {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.arv-video-empty {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+@media (max-width: 767px) {
+
+    .arv-video-wrapper {
+        aspect-ratio: 16 / 10;
+    }
+
+}
+/* ==========================================
+   GALLERY TABS
+========================================== */
+
+.arv-gallery-tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 0 !important;
+    margin-bottom: 28px !important;
+    padding: 0;
+}
+
+/* Buttons */
+.arv-gallery-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 130px;
+    height: 48px;
+
+    padding: 0 30px;
+
+    border: 1px solid #dca63a;
+    border-radius: 5px;
+
+    background: #ffffff;
+    color: #111111;
+
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+
+    line-height: 1;
+    letter-spacing: 0.2px;
+
+    cursor: pointer;
+    outline: none;
+
+    transition: all 0.3s ease;
+}
+
+/* Hover */
+.arv-gallery-tab:hover {
+    background: #dca63a;
+    border-color: #dca63a;
+    color: #ffffff;
+
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Active */
+.arv-gallery-tab.active {
+    background: #dca63a;
+    border-color: #dca63a;
+    color: #ffffff;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
+}
+
+/* Click */
+.arv-gallery-tab:active {
+    transform: translateY(0);
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 767px) {
+
+    .arv-gallery-tabs {
+        gap: 10px;
+        margin-bottom: 22px !important;
+    }
+
+    .arv-gallery-tab {
+        min-width: 115px;
+        height: 44px;
+
+        padding: 0 24px;
+
+        font-size: 15px;
+    }
+}
+/* =========================================
+   GALLERY TABS - FINAL
+========================================= */
+
+.arv-gallery-tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    margin: 0 0 28px 0 !important;
+    padding: 0 !important;
+}
+
+.arv-gallery-tab {
+    width: 130px;
+    height: 48px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #dca63a;
+    border-radius: 5px;
+
+    background: #fff;
+    color: #111;
+
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.arv-gallery-tab:hover {
+    background: #dca63a;
+    color: #fff;
+    border-color: #dca63a;
+    transform: translateY(-2px);
+}
+
+.arv-gallery-tab.active {
+    background: #dca63a;
+    color: #fff;
+    border-color: #dca63a;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
+}
+
+
+/* =========================================
+   REMOVE EXTRA GAP ABOVE IMAGE CARDS
+========================================= */
+
+.arv-gallery-tabs + .page-gallery {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.arv-gallery-tabs + .arv-video-gallery {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767px) {
+
+    .arv-gallery-tabs {
+        gap: 10px;
+        margin-bottom: 22px !important;
+    }
+
+    .arv-gallery-tab {
+        width: 115px;
+        height: 44px;
+        font-size: 15px;
+    }
+}
+.arv-gallery-tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 25px !important;
+    margin-bottom: 28px !important;
+}
