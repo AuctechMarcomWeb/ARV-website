@@ -404,6 +404,12 @@ body{
 	margin-bottom: 0;
 }
 
+/* About page — text justify */
+.about-us-content .section-title p,
+.about-us-content .qualification-block p {
+    text-align: justify;
+}
+
 
 .section-title-content.dark-section p,
 .section-title.dark-section p,
