@@ -1,51 +1,43 @@
 Options -Indexes
+Options +FollowSymLinks
 RewriteEngine On
+RewriteBase /
 
 # ─────────────────────────────────────────────
-# 1. Force HTTPS (uncomment after SSL is active)
-# ─────────────────────────────────────────────
-# RewriteCond %{HTTPS} off
-# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-# ─────────────────────────────────────────────
-# 2. Serve existing files / directories as-is
-#    (css, js, images, .html direct access, etc.)
+# Serve existing real files/dirs as-is
 # ─────────────────────────────────────────────
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
 # ─────────────────────────────────────────────
-# 3. Blog clean URLs  ← MUST be before Section 5
-#    These slugs have matching .html files so
-#    they MUST be caught here first
+# Blog clean URLs (MUST be before generic rule)
 # ─────────────────────────────────────────────
-RewriteRule ^vastu-tips-for-modern-homes/?$               blog-detail.html?slug=vastu-tips-for-modern-homes                   [L,QSA]
-RewriteRule ^interior-design-trends-2026/?$               blog-detail.html?slug=interior-design-trends-2026                   [L,QSA]
-RewriteRule ^how-to-choose-the-right-architect/?$         blog-detail.html?slug=how-to-choose-the-right-architect             [L,QSA]
-RewriteRule ^project-planning-checklist-for-renovation/?$ blog-detail.html?slug=project-planning-checklist-for-renovation     [L,QSA]
-RewriteRule ^vastu-vs-modern-design-finding-balance/?$    blog-detail.html?slug=vastu-vs-modern-design-finding-balance        [L,QSA]
-RewriteRule ^small-space-interior-design-ideas/?$         blog-detail.html?slug=small-space-interior-design-ideas             [L,QSA]
+RewriteRule ^vastu-tips-for-modern-homes/?$               /blog-detail.html?slug=vastu-tips-for-modern-homes                   [L,QSA]
+RewriteRule ^interior-design-trends-2026/?$               /blog-detail.html?slug=interior-design-trends-2026                   [L,QSA]
+RewriteRule ^how-to-choose-the-right-architect/?$         /blog-detail.html?slug=how-to-choose-the-right-architect             [L,QSA]
+RewriteRule ^project-planning-checklist-for-renovation/?$ /blog-detail.html?slug=project-planning-checklist-for-renovation     [L,QSA]
+RewriteRule ^vastu-vs-modern-design-finding-balance/?$    /blog-detail.html?slug=vastu-vs-modern-design-finding-balance        [L,QSA]
+RewriteRule ^small-space-interior-design-ideas/?$         /blog-detail.html?slug=small-space-interior-design-ideas             [L,QSA]
 
 # ─────────────────────────────────────────────
-# 4. Portfolio clean URLs  ← MUST be before Section 5
+# Portfolio clean URLs (MUST be before generic rule)
 # ─────────────────────────────────────────────
-RewriteRule ^riverside-villa-interior-design/?$           portfolio-detail.html?slug=riverside-villa-interior-design          [L,QSA]
-RewriteRule ^corporate-office-fitout-planning/?$          portfolio-detail.html?slug=corporate-office-fit-out-planning        [L,QSA]
-RewriteRule ^corporate-office-fit-out-planning/?$         portfolio-detail.html?slug=corporate-office-fit-out-planning        [L,QSA]
-RewriteRule ^vastu-aligned-home-renovation/?$             portfolio-detail.html?slug=vastu-aligned-home-renovation            [L,QSA]
-RewriteRule ^boutique-hotel-interior-consultancy/?$       portfolio-detail.html?slug=boutique-hotel-interior-consultancy      [L,QSA]
-RewriteRule ^residential-architectural-planning/?$        portfolio-detail.html?slug=residential-architectural-planning       [L,QSA]
-RewriteRule ^luxury-apartment-interior-decor/?$           portfolio-detail.html?slug=luxury-apartment-interior-decor          [L,QSA]
+RewriteRule ^riverside-villa-interior-design/?$           /portfolio-detail.html?slug=riverside-villa-interior-design          [L,QSA]
+RewriteRule ^corporate-office-fitout-planning/?$          /portfolio-detail.html?slug=corporate-office-fit-out-planning        [L,QSA]
+RewriteRule ^corporate-office-fit-out-planning/?$         /portfolio-detail.html?slug=corporate-office-fit-out-planning        [L,QSA]
+RewriteRule ^vastu-aligned-home-renovation/?$             /portfolio-detail.html?slug=vastu-aligned-home-renovation            [L,QSA]
+RewriteRule ^boutique-hotel-interior-consultancy/?$       /portfolio-detail.html?slug=boutique-hotel-interior-consultancy      [L,QSA]
+RewriteRule ^residential-architectural-planning/?$        /portfolio-detail.html?slug=residential-architectural-planning       [L,QSA]
+RewriteRule ^luxury-apartment-interior-decor/?$           /portfolio-detail.html?slug=luxury-apartment-interior-decor          [L,QSA]
 
 # ─────────────────────────────────────────────
-# 5. Generic clean URLs — /about → about.html
-#    Only runs if no rule above matched
+# Generic clean URLs — /about → /about.html
 # ─────────────────────────────────────────────
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^(.+)$ $1.html [L]
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^([^.]+)/?$ /$1.html [L]
 
 # ─────────────────────────────────────────────
-# 6. Fallback — custom 404 page
+# Custom 404
 # ─────────────────────────────────────────────
 ErrorDocument 404 /404.html
