@@ -1,0 +1,61 @@
+Options -Indexes
+RewriteEngine On
+
+# ─────────────────────────────────────────────
+# 1. Force HTTPS (uncomment after SSL is active)
+# ─────────────────────────────────────────────
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ─────────────────────────────────────────────
+# 2. Serve existing files / directories as-is
+# ─────────────────────────────────────────────
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# ─────────────────────────────────────────────
+# 3. Clean URLs — add .html if file exists
+#    /about  →  about.html
+# ─────────────────────────────────────────────
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]
+
+# ─────────────────────────────────────────────
+# 4. Portfolio clean URLs
+# ─────────────────────────────────────────────
+RewriteRule ^riverside-villa-interior-design/?$           portfolio-detail.html?slug=riverside-villa-interior-design          [L,QSA]
+RewriteRule ^corporate-office-fitout-planning/?$          portfolio-detail.html?slug=corporate-office-fit-out-planning         [L,QSA]
+RewriteRule ^corporate-office-fit-out-planning/?$         portfolio-detail.html?slug=corporate-office-fit-out-planning         [L,QSA]
+RewriteRule ^vastu-aligned-home-renovation/?$             portfolio-detail.html?slug=vastu-aligned-home-renovation             [L,QSA]
+RewriteRule ^boutique-hotel-interior-consultancy/?$       portfolio-detail.html?slug=boutique-hotel-interior-consultancy       [L,QSA]
+RewriteRule ^residential-architectural-planning/?$        portfolio-detail.html?slug=residential-architectural-planning        [L,QSA]
+RewriteRule ^luxury-apartment-interior-decor/?$           portfolio-detail.html?slug=luxury-apartment-interior-decor           [L,QSA]
+
+# ─────────────────────────────────────────────
+# 5. Blog clean URLs
+# ─────────────────────────────────────────────
+RewriteRule ^vastu-tips-for-modern-homes/?$               blog-detail.html?slug=vastu-tips-for-modern-homes                   [L,QSA]
+RewriteRule ^interior-design-trends-2026/?$               blog-detail.html?slug=interior-design-trends-2026                   [L,QSA]
+RewriteRule ^how-to-choose-the-right-architect/?$         blog-detail.html?slug=how-to-choose-the-right-architect             [L,QSA]
+RewriteRule ^project-planning-checklist-for-renovation/?$ blog-detail.html?slug=project-planning-checklist-for-renovation     [L,QSA]
+RewriteRule ^vastu-vs-modern-design-finding-balance/?$    blog-detail.html?slug=vastu-vs-modern-design-finding-balance        [L,QSA]
+RewriteRule ^small-space-interior-design-ideas/?$         blog-detail.html?slug=small-space-interior-design-ideas             [L,QSA]
+
+# ─────────────────────────────────────────────
+# 6. Standalone service/detail pages (sitemap URLs)
+#    These have their own .html files — Section 3
+#    (clean URL auto-add) handles them, but
+#    explicit rules ensure correct resolution.
+# ─────────────────────────────────────────────
+RewriteRule ^architectural-services/?$          architectural-services.html          [L]
+RewriteRule ^interior-decor-consultancy/?$      interior-decor-consultancy.html      [L]
+RewriteRule ^interior-design-consultancy/?$     interior-design-consultancy.html     [L]
+RewriteRule ^vastu-consultancy/?$               vastu-consultancy.html               [L]
+RewriteRule ^project-planning/?$               project-planning.html                [L]
+RewriteRule ^related-services/?$               related-services.html                [L]
+
+# ─────────────────────────────────────────────
+# 6. Fallback — custom 404 page
+# ─────────────────────────────────────────────
+ErrorDocument 404 /404.html
