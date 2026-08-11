@@ -2416,8 +2416,10 @@ header.main-header .header-sticky.active .navbar{
 
 .team-image figure img{
 	width: 100%;
-    aspect-ratio: 1 / 1.11;
-    object-fit: cover;
+    height: auto;
+    aspect-ratio: unset;
+    object-fit: unset;
+	display: block;
 	transition: all 0.4s ease-in-out;
 }
 
