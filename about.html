@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head><meta content="index, follow" name="robots"/>
 <!-- Meta -->
@@ -45,7 +45,7 @@
       "logo": "https://www.archivastuconsultants.com/images/site-logo.png",
       "image": "https://www.archivastuconsultants.com/images/hero-bg.jpg",
       "telephone": "+91-9719973700",
-      "email": "arventerprises3010@gmail.com",
+      "email": "info@arvvastuinteriors.com",
       "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
@@ -177,35 +177,62 @@
     text-align: left;
   }
 
-  /* Team card: image + bio side-by-side, bio fills remaining width */
-  .team-member-item {
+  /* Team card — desktop: image left, content right */
+  #team-member-main {
     max-width: 900px;
     margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
+    display: flex !important;
+    /* flex-wrap: wrap !important; */
+    flex-direction: row !important;
     align-items: flex-start;
     gap: 32px;
   }
-  .team-image {
-    flex: 0 0 280px;
+  #team-member-main .team-image {
+    flex: 0 0 280px !important;
+    width: 280px !important;
+    max-width: 280px !important;
+    overflow: visible !important;
   }
-  .team-image img {
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
-    display: block;
+  #team-member-main .team-image img {
+    width: 100% !important;
+    height: 320px !important;
+    object-fit: cover !important;
+    display: block !important;
   }
-  .team-body {
-    flex: 1 1 320px;
-    min-width: 260px;
+  #team-member-main .team-body {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    width: auto !important;
+    display: block !important;
+    visibility: visible !important;
+    overflow: visible !important;
   }
-  @media (max-width: 767px) {
-    .team-member-item {
-      flex-direction: column;
+
+  /* Tablet & mobile (< 992px): image upar, content neeche */
+  @media (max-width: 991px) {
+    #team-member-main {
+      flex-direction: column !important;
+      gap: 20px !important;
     }
-    .team-image {
-      flex: 1 1 100%;
-      width: 100%;
+    #team-member-main .team-image {
+      flex: none !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow: visible !important;
+    }
+    #team-member-main .team-image img {
+      width: 100% !important;
+      height: auto !important;
+      object-fit: cover !important;
+      object-position: top center !important;
+    }
+    #team-member-main .team-body {
+      flex: none !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      display: block !important;
+      visibility: visible !important;
+      overflow: visible !important;
     }
   }
 
@@ -399,7 +426,7 @@
 <div class="about-contact-item wow fadeInUp" data-wow-delay="0.6s">
 <div class="icon-box">
 <figure class="image-anime">
-<img alt="" decoding="async" loading="lazy" src="images/author-1.jpg"/>
+<img alt="Arvind Kumar Dwivedi" decoding="async" loading="lazy" src="images/founder.jpeg"/>
 </figure>
 </div>
 <div class="about-contact-content">
@@ -659,7 +686,7 @@
 <div class="row justify-content-center">
 <div class="col-lg-10">
 <!-- Team Member Item Start -->
-<div class="team-member-item wow fadeInUp">
+<div class="team-member-item wow fadeInUp" id="team-member-main">
 <!-- Team Image Start -->
 <div class="team-image">
 <a data-cursor-text="View" href="contact.html">
@@ -679,7 +706,7 @@
 <!-- Team Content Start -->
 <div class="team-content">
 <h3>Arvind Kumar Dwivedi</h3>
-<p>Founder &amp; Principal Consultant</p>
+<p><strong>Founder &amp; Principal Consultant</strong></p>
 <p>Emotional Journey - "purpose of disclosed my emotional journey Just Reaching a massage how vastu interior support For Happy lives in living with pleasure. Beginning from my childhood days i always focus "out of the box" but life giving me chance for work on That as second inning of my life Journey, when i become quite mature. i am live example of how vastu-interiors work in my day-to-day living and support to fighting unwanted negative energy and support to maintain positive energy, giving you authentic and prominently. Please Read it very carefully.</p>
 </div>
 <!-- Team Content End -->
@@ -690,7 +717,7 @@
 <ul>
 <li><a href="tel:+919719973700"><i class="fa-solid fa-phone"></i></a></li>
 <li><a href="https://wa.me/919719973700" rel="noopener" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li>
-<li><a href="mailto:arventerprises3010@gmail.com"><i class="fa-solid fa-envelope"></i></a></li>
+<li><a href="mailto:info@arvvastuinteriors.com"><i class="fa-solid fa-envelope"></i></a></li>
 </ul>
 </div>
 <!-- Team Social Icon End -->
@@ -847,7 +874,7 @@
 </h2>
 <div aria-labelledby="heading4" class="accordion-collapse collapse" data-bs-parent="#accordion" id="collapse4">
 <div class="accordion-body">
-<p>Call or WhatsApp us at +91 97199 73700, email arventerprises3010@gmail.com, or fill out the contact form — we typically respond within a business day.</p>
+<p>Call or WhatsApp us at +91 97199 73700, email info@arvvastuinteriors.com, or fill out the contact form — we typically respond within a business day.</p>
 </div>
 </div>
 </div>
@@ -884,47 +911,37 @@
 </div>
 <!-- Section Title End -->
 <!-- Client Logo Slider Start -->
-<div class="our-client-slider">
+<!-- <div class="our-client-slider">
 <div class="swiper">
 <div class="swiper-wrapper">
-<!-- Client Logo Start -->
 <div class="swiper-slide">
 <div class="client-logo">
 <img alt="" decoding="async" loading="lazy" src="images/client-logo-1.svg"/>
 </div>
 </div>
-<!-- Client Logo End -->
-<!-- Client Logo Start -->
 <div class="swiper-slide">
 <div class="client-logo">
 <img alt="" decoding="async" loading="lazy" src="images/client-logo-2.svg"/>
 </div>
 </div>
-<!-- Client Logo End -->
-<!-- Client Logo Start -->
 <div class="swiper-slide">
 <div class="client-logo">
 <img alt="" decoding="async" loading="lazy" src="images/client-logo-3.svg"/>
 </div>
 </div>
-<!-- Client Logo End -->
-<!-- Client Logo Start -->
 <div class="swiper-slide">
 <div class="client-logo">
 <img alt="" decoding="async" loading="lazy" src="images/client-logo-4.svg"/>
 </div>
 </div>
-<!-- Client Logo End -->
-<!-- Client Logo Start -->
 <div class="swiper-slide">
 <div class="client-logo">
 <img alt="" decoding="async" loading="lazy" src="images/client-logo-1.svg"/>
 </div>
 </div>
-<!-- Client Logo End -->
 </div>
 </div>
-</div>
+</div> -->
 <!-- Client Logo Slider End -->
 </div>
 </div>
@@ -942,8 +959,8 @@
 <div class="row align-items-center">
 <div class="col-md-6">
 <!-- Footer Logo Start -->
-<div class="footer-logo">
-<img alt="ARV EnterprisesConsultants" decoding="async" loading="lazy" src="images/footer-logo-final.png" style="height:75px;width:auto;object-fit:contain;"/>
+<div class=".footer-logo-img">
+<img alt="ARV EnterprisesConsultants" decoding="async" loading="lazy" src="images/footer-logo.jpeg" style="height:100px;width:auto;object-fit:contain;"/>
 </div>
 <!-- Footer Logo End -->
 </div>
@@ -1016,7 +1033,9 @@
 <i class="fa-solid fa-envelope"></i>
 </div>
 <div class="footer-contact-content">
-<p><a href="mailto:arventerprises3010@gmail.com" style="color:inherit;">arventerprises3010@gmail.com</a></p>
+<!-- <p><a href="mailto:arventerprises3010@gmail.com" style="color:inherit;">arventerprises3010@gmail.com</a></p> -->
+<p><a href="mailto:arvind@arvvastuinteriors.com" style="color:inherit;">arvind@arvvastuinteriors.com</a></p>
+<p><a href="mailto:info@arvvastuinteriors.com" style="color:inherit;">info@arvvastuinteriors.com</a></p>
 </div>
 </div>
 <!-- Footer Contact Item End -->
