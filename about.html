@@ -260,10 +260,12 @@
   }
   #team-member-main .team-content {
     flex: 1 !important;
-  }
     display: block !important;
     visibility: visible !important;
-    overflow: visible !important;
+  }
+  #team-member-main .team-body {
+    display: flex !important;
+    visibility: visible !important;
   }
 
   /* Tablet & mobile (< 992px): image upar, content neeche */
@@ -293,16 +295,23 @@
       visibility: visible !important;
       overflow: visible !important;
     }
+    #team-member-main .team-content {
+      display: block !important;
+      visibility: visible !important;
+    }
   }
 
-  /* Mobile: Stack button and contact vertically */
-  @media (max-width: 767px) {
-    #team-member-main .team-content .row > .col-md-6 {
-      margin-bottom: 16px;
+  /* Fix white space above navbar on mobile */
+  @media (max-width: 575px) {
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
     }
-    #team-member-main .btn-default {
-      width: 100% !important;
-      text-align: center;
+    .main-header {
+      margin-top: 0 !important;
+    }
+    body {
+      padding-top: 0 !important;
     }
   }
 
