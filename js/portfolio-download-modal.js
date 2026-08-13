@@ -942,7 +942,21 @@
 
       if (!clickedElement) return;
 
-      const isTrigger =
+      // Check if it's a download portfolio button (triggers modal)
+      const isDownloadTrigger = 
+        clickedElement.classList.contains("download-portfolio-btn") ||
+        clickedElement.classList.contains("arv-portfolio-download-trigger");
+
+      if (isDownloadTrigger) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        openModal();
+        return;
+      }
+
+      // Check if it's a portfolio menu link (redirects to founder-profile.html)
+      const isPortfolioMenuLink =
         clickedElement.classList.contains(
           "arv-portfolio-modal-trigger"
         ) ||
@@ -951,13 +965,15 @@
         ) ||
         isPortfolioLink(clickedElement);
 
-      if (!isTrigger) return;
-
-      event.preventDefault();
-      event.stopPropagation();
-      event.stopImmediatePropagation();
-
-      openModal();
+      if (isPortfolioMenuLink) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        
+        // Redirect to founder profile page
+        window.location.href = "founder-profile.html";
+        return;
+      }
     },
     true
   );
