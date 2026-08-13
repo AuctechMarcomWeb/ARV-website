@@ -955,7 +955,7 @@
         return;
       }
 
-      // Check if it's a portfolio menu link (redirects to founder-profile.html)
+      // Check if it's a portfolio menu link
       const isPortfolioMenuLink =
         clickedElement.classList.contains(
           "arv-portfolio-modal-trigger"
@@ -970,8 +970,17 @@
         event.stopPropagation();
         event.stopImmediatePropagation();
         
-        // Redirect to founder profile page
-        window.location.href = "founder-profile.html";
+        // Check screen size - on mobile/small devices redirect to founder profile
+        // On desktop/large devices show modal
+        const isMobileDevice = window.innerWidth < 992;
+        
+        if (isMobileDevice) {
+          // Mobile: Redirect to founder profile page
+          window.location.href = "founder-profile.html";
+        } else {
+          // Desktop: Open modal popup
+          openModal();
+        }
         return;
       }
     },
