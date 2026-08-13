@@ -227,27 +227,40 @@
     max-width: 900px;
     margin: 0 auto;
     display: flex !important;
-    /* flex-wrap: wrap !important; */
     flex-direction: row !important;
-    align-items: flex-start;
+    align-items: stretch !important;
     gap: 32px;
   }
   #team-member-main .team-image {
-    flex: 0 0 280px !important;
-    width: 280px !important;
-    max-width: 280px !important;
+    flex: 0 0 380px !important;
+    width: 380px !important;
+    max-width: 380px !important;
     overflow: visible !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  #team-member-main .team-image figure {
+    flex: 1 !important;
+    display: flex !important;
   }
   #team-member-main .team-image img {
     width: 100% !important;
-    height: 320px !important;
+    height: 100% !important;
+    min-height: 320px !important;
     object-fit: cover !important;
+    object-position: center top !important;
     display: block !important;
   }
   #team-member-main .team-body {
     flex: 1 1 0 !important;
     min-width: 0 !important;
     width: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  #team-member-main .team-content {
+    flex: 1 !important;
+  }
     display: block !important;
     visibility: visible !important;
     overflow: visible !important;
@@ -268,6 +281,7 @@
     #team-member-main .team-image img {
       width: 100% !important;
       height: auto !important;
+      min-height: 300px !important;
       object-fit: cover !important;
       object-position: top center !important;
     }
@@ -278,6 +292,17 @@
       display: block !important;
       visibility: visible !important;
       overflow: visible !important;
+    }
+  }
+
+  /* Mobile: Stack button and contact vertically */
+  @media (max-width: 767px) {
+    #team-member-main .team-content .row > .col-md-6 {
+      margin-bottom: 16px;
+    }
+    #team-member-main .btn-default {
+      width: 100% !important;
+      text-align: center;
     }
   }
 
@@ -719,13 +744,15 @@
 <!-- Section Title Start -->
 <div class="section-title">
 <h3 class="wow fadeInUp">leadership</h3>
-<h2 class="text-anime-style-2" data-cursor="-opaque">The person <span>behind ArchiVastu</span></h2>
+<h2 class="text-anime-style-2" data-cursor="-opaque">The person <span>behind ARV Enterprises</span></h2>
 </div>
 <!-- Section Title End -->
 </div>
 <div class="col-lg-7">
 <!-- Section Title Content Start -->
-
+<div class="section-title-content">
+<p class="wow fadeInUp" data-wow-delay="0.2s" style="text-align: justify;">Meet Arvind Kumar Dwivedi — a Vastu Interior & Décor Consultant with over a decade of experience creating personalized, harmonious spaces that blend functionality, aesthetics, and traditional Vastu principles.</p>
+</div>
 <!-- Section Title Content End -->
 </div>
 </div>
@@ -735,14 +762,14 @@
 <div class="team-member-item wow fadeInUp" id="team-member-main">
 <!-- Team Image Start -->
 <div class="team-image">
-<a data-cursor-text="View" href="contact.html">
+<a data-cursor-text="View Profile" href="founder-profile.html">
 <figure class="image-anime">
-<img alt="" decoding="async" loading="lazy" src="images/founder.jpeg"/>
+<img alt="Arvind Kumar Dwivedi - Founder" decoding="async" loading="lazy" src="images/founder.jpeg"/>
 </figure>
 </a>
 <!-- Team Readmore Button Start -->
 <div class="team-readmore-btn">
-<a href="contact.html"><img alt="" decoding="async" loading="lazy" src="images/arrow-white.svg"/></a>
+<a href="founder-profile.html"><img alt="View Profile" decoding="async" loading="lazy" src="images/arrow-white.svg"/></a>
 </div>
 <!-- Team Readmore Button End -->
 </div>
@@ -752,27 +779,41 @@
 <!-- Team Content Start -->
 <div class="team-content">
 <h3>Arvind Kumar Dwivedi</h3>
-<p><strong>Founder &amp; Principal Consultant</strong></p>
-<p>Emotional Journey - "purpose of disclosed my emotional journey Just Reaching a massage how vastu interior support For Happy lives in living with pleasure. Beginning from my childhood days i always focus "out of the box" but life giving me chance for work on That as second inning of my life Journey, when i become quite mature. i am live example of how vastu-interiors work in my day-to-day living and support to fighting unwanted negative energy and support to maintain positive energy, giving you authentic and prominently. Please Read it very carefully.</p>
+<p><strong>Founder &amp; Principal Consultant | Vastu Interior & Décor Specialist</strong></p>
+<p style="text-align: justify; margin-top: 16px;">With over ten years of experience as an independent Interior Consultant, Mr. Dwivedi has developed a practical, client-centric approach focused on creating personalised solutions that reflect each client's needs, lifestyle and aspirations.</p>
+<p style="text-align: justify; margin-top: 12px;">Before entering the field of interior consulting, he built extensive experience in the service industry at leading organisations, including Kotak Mahindra Life Insurance, ICICI Prudential Life Insurance, and Max New York Life Insurance. This professional journey gave him valuable insight into market dynamics, customer expectations and relationship management.</p>
+<p style="text-align: justify; margin-top: 12px;">His strong communication, motivational and leadership abilities have enabled him to build lasting client relationships and encourage effective team collaboration. His commitment to dependable after-sales service continues to be one of the defining strengths of his work.</p>
+
+<!-- Two Column Layout for Button and Contact -->
+<div class="row" style="margin-top: 24px; align-items: center;">
+<div class="col-md-6">
+<div style="margin-bottom: 16px;">
+<a href="founder-profile.html" class="btn-default" style="display: inline-block; width: 100%; background-color: #C9A961; border-color: #C9A961;">Know More About Founder</a>
 </div>
-<!-- Team Content End -->
-<!-- Team Social List Start -->
+</div>
+<div class="col-md-6">
 <div class="team-social-list">
+<!-- <p style="font-weight: 600; margin-bottom: 12px; color: #8B7355; text-align: center;">Connect with Founder:</p> -->
 <!-- Team Social Icon Start -->
-<div class="team-social-icon">
+<div class="team-social-icon" style="justify-content: center;">
 <ul>
-<li><a href="tel:+919719973700"><i class="fa-solid fa-phone"></i></a></li>
-<li><a href="https://wa.me/919719973700" rel="noopener" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li>
-<li><a href="mailto:info@arvvastuinteriors.com"><i class="fa-solid fa-envelope"></i></a></li>
+<li><a href="tel:+919719973700" title="Call Now"><i class="fa-solid fa-phone"></i></a></li>
+<li><a href="https://wa.me/919719973700" rel="noopener" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a></li>
+<li><a href="mailto:arvind@arvvastuinteriors.com" title="Email"><i class="fa-solid fa-envelope"></i></a></li>
 </ul>
 </div>
 <!-- Team Social Icon End -->
 </div>
-<!-- Team Social List End -->
+</div>
+</div>
+<!-- Two Column Layout End -->
+
+</div>
+<!-- Team Content End -->
 </div>
 <!-- Team Body End -->
 </div>
-<!-- Team Member Item Start -->
+<!-- Team Member Item End -->
 </div>
 </div>
 </div>
