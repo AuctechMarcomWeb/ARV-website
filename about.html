@@ -122,6 +122,7 @@
     flex-wrap: wrap;
     gap: 24px;
     align-items: flex-start;
+    height: 100%;
   }
   .about-img-1,
   .about-img-2 {
@@ -138,6 +139,18 @@
   .experience-counter,
   .feedback-counter {
     text-align: center;
+  }
+
+  /* Equal height for left and right columns */
+  .about-us .row.align-items-center > .col-lg-6 {
+    display: flex;
+    flex-direction: column;
+  }
+  .about-us-content,
+  .about-us-images {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   /* Facility list: even columns that wrap cleanly on smaller screens */
@@ -175,6 +188,38 @@
     flex: 1 1 22%;
     min-width: 220px;
     text-align: left;
+  }
+
+  /* Best Selling Section: Equal height for left content and right image on large devices */
+  @media (min-width: 992px) {
+    .best-selling .row {
+      display: flex;
+      align-items: stretch;
+    }
+    .best-selling .col-lg-6 {
+      display: flex;
+      flex-direction: column;
+    }
+    .best-selling-content,
+    .best-selling-iamge {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .best-selling-content-img figure,
+    .best-selling-iamge figure {
+      flex: 1;
+      display: flex;
+      height: 100%;
+    }
+    .best-selling-content-img img,
+    .best-selling-iamge img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
   }
 
   /* Team card — desktop: image left, content right */
@@ -380,14 +425,15 @@
 <div class="section-title">
 <h3 class="wow fadeInUp">about us</h3>
 <h2 class="text-anime-style-2" data-cursor="-opaque">One consultancy for design, structure <span>and direction</span></h2>
-<p class="wow fadeInUp" data-wow-delay="0.2s" style="text-align: justify;">As Interior consultant having 10 years experience as a self-employed, i have developed a practical approach to understanding client needs and delivering tailored solutions.</p>
-<p class="wow fadeInUp" data-wow-delay="0.2s" style="text-align: justify;" >As The former connect with service Industry, play Best role at ICICI Kotak Mahendra Life Insurance Co. Ltd, ICICI Prudential Life Insurance Co. Ltd, Max New York Life Insurance Co. Ltd. provided me with extensive insights into market dynamics and customer relationship management.</p>
-<p class="wow fadeInUp" data-wow-delay="0.2s" style="text-align: justify;">I pride myself on my strong communication skills, motivation, and leadership abilities, which have been instrumental in maintaining long-lasting relationship with client and fostering team collaboration for optimal performance. My commitment to enhancing after-sales service has consistently contributed to customer retention. an essential aspect of our industry.</p>
-<div class="qualification-block wow fadeInUp" data-wow-delay="0.2s">
-<h4>• My Acadamic Qualification along with professional Qualification</h4>
-<p style="text-align: justify;">
-"My Acadamic journey start from "Central school Bangalore", i have completed my acadamic from different-different cities beacuse my father was "war-ent-officer of Indian Air Force" finally i have completed my Bachelor degree from Kanpur University. This is also my Home city. This is my Happy acadamic journey. and my professional journey started from Lucknow - in 2001, when i have joined Jawpuriya institute of Management, completed PGDIRM (Post Graduate Diploma in Insurance & Risk Management), apart from This specialisation in Marketing from IIM (Indian Institute of Management)."</p>
-</div>
+<p class="wow fadeInUp" data-wow-delay="0.2s" style="text-align: justify;">ARV EnterprisesConsultants is a multidisciplinary design consultancy delivering integrated solutions across interior design, architecture, project planning, and Vastu consultancy. With over a decade of experience in the built environment sector, we bring a coordinated approach that aligns aesthetics, functionality, and spatial harmony under one advisory framework.</p>
+<p class="wow fadeInUp" data-wow-delay="0.2s" style="text-align: justify;">Our practice philosophy is rooted in practical, client-centric design thinking. We specialise in translating complex spatial requirements into actionable, budget-conscious design strategies that respect both modern design principles and traditional Vastu guidelines — without compromise on either front.</p>
+<p class="wow fadeInUp" data-wow-delay="0.2s" style="text-align: justify;">What sets us apart is our single-point accountability model. Unlike fragmented consultancies where architectural, interior, and Vastu advice comes from separate specialists — often conflicting — we provide unified recommendations reviewed holistically before they reach you. This eliminates redundancy, reduces project timelines, and ensures design coherence across all touchpoints.</p>
+<!-- <div class="qualification-block wow fadeInUp" data-wow-delay="0.2s">
+<h4>Our Core Competencies &amp; Service Excellence</h4>
+<p style="text-align: justify;">Our consultancy framework integrates five distinct yet interconnected service verticals: Interior Design Consultancy for space planning and aesthetic direction, Interior Decor Consultancy for material selection and finishing specifications, Project Planning for timeline and resource management, Architectural Services for structural design and building compliance, and Vastu Consultancy for traditional spatial harmony principles adapted to contemporary layouts.</p>
+<p style="text-align: justify;">We serve residential, commercial, and institutional clients across Uttar Pradesh and neighboring regions, with project scales ranging from single-room renovations to full property design and construction oversight. Our methodology emphasizes transparency in pricing, adherence to committed timelines, and post-project support — ensuring clients receive not just design documentation, but end-to-end guidance through execution, vendor coordination, and quality assurance at every stage of the project lifecycle.</p>
+</div> -->
+
 </div>
 <!-- Section Title End -->
 <!-- About Us Content Body Start -->
@@ -452,7 +498,7 @@
 </div>
 <div class="about-facility-content">
 <h3>transparent pricing</h3>
-<p>Clear, itemised quotations for every consultation and project — no hidden costs.</p>
+<p style="text-align: justify;">Detailed, itemized quotations for every phase — consultation, design documentation, vendor coordination, and execution oversight. Clear cost breakdowns with no hidden fees or mid-project surprises, enabling confident budgeting and financial planning.</p>
 </div>
 </div>
 <!-- About Facility Item End -->
@@ -463,7 +509,7 @@
 </div>
 <div class="about-facility-content">
 <h3>quality checked</h3>
-<p>Every recommendation is checked against your actual layout, budget, and constraints before it reaches you.</p>
+<p style="text-align: justify;">Multi-level verification before client presentation — checking aesthetic coherence, structural feasibility, Vastu compliance, material availability, and cost-effectiveness. Only validated, execution-ready recommendations reach you.</p>
 </div>
 </div>
 <!-- About Facility Item End -->
@@ -474,7 +520,7 @@
 </div>
 <div class="about-facility-content">
 <h3>one accountable consultant</h3>
-<p>Design, architecture, and Vastu advice handled by one consultant — nothing falls between specialists.</p>
+<p style="text-align: justify;">Single principal consultant oversees interior design, architecture, and Vastu — eliminating conflicting advice and coordination gaps. Integrated recommendations where all disciplines are harmonized from the outset.</p>
 </div>
 </div>
 <!-- About Facility Item End -->
@@ -499,11 +545,11 @@
 </div>
 <div class="col-lg-6">
 <!-- Section Title Content Start -->
-<div class="section-title-content dark-section">
+<!-- <div class="section-title-content dark-section">
 <p class="wow fadeInUp" data-wow-delay="0.2s" style="text-align: justify;"><strong>Emotional Journey</strong> - "purpose of disclosed my emotional journey Just Reaching a massage how vastu interior support For Happy lives in living with pleasure. Beginning from my childhood days i always focus "out of the box" but life giving me chance for work on That as second inning of my life Journey, when i become quite mature.</p>
 <p class="wow fadeInUp" data-wow-delay="0.2s" style="text-align: justify;">i am live example of how vastu-interiors work in my day-to-day living and support to fighting unwanted negative energy and support to maintain positive energy, giving you authentic and prominently. Please Read it very carefully.</p>
 <p class="wow fadeInUp" data-wow-delay="0.2s" style="text-align: justify;">• When i was only 10 days old baby, got Tetanus infection and chance of survival was zero, but i fight and survive.</p>
-</div>
+</div> -->
 <!-- Section Title Content End -->
 </div>
 </div>
@@ -518,7 +564,7 @@
 </div>
 <div class="vision-mission-content">
 <h3>our vision</h3>
-<p>To be a recognised name across interior design, architecture, and Vastu consultancy — known not for being the biggest, but for being the most coordinated. We measure success by whether a client ever needs a second, conflicting opinion. Our goal is that they never do.</p>
+<p style="text-align: justify;">To establish ARV EnterprisesConsultants as a benchmark for integrated design consultancy across North India, recognized for delivering seamless coordination between interior design, architectural planning, and Vastu principles. We aspire to transform how clients experience consultancy services — eliminating fragmentation, conflicting recommendations, and the inefficiencies of managing multiple specialists. Our success is measured not by project volume, but by client confidence: the certainty that every recommendation they receive is cohesive, practical, and aligned with their vision, budget, and timeline.</p>
 </div>
 </div>
 <!-- Vision Mission Item End -->
@@ -529,7 +575,7 @@
 </div>
 <div class="vision-mission-content">
 <h3>our mission</h3>
-<p>To advise on space planning, architecture, decor, and Vastu as one coordinated discipline — practical, budget-aware recommendations delivered on timelines we commit to and actually keep.</p>
+<p style="text-align: justify;">To deliver holistic, client-centric design solutions that unify aesthetics, functionality, structural integrity, and spatial harmony under a single advisory framework. We are committed to providing transparent pricing structures, realistic project timelines, and post-execution support that extends beyond design documentation. Our mission encompasses rigorous site assessment, budget-conscious material sourcing, vetted vendor coordination, and quality oversight at every project phase — ensuring clients receive not just design concepts, but implementable strategies backed by accountability and measurable outcomes.</p>
 </div>
 </div>
 <!-- Vision Mission Item End -->
@@ -558,7 +604,7 @@
 <div class="section-title">
 <h3 class="wow fadeInUp">recommended &amp; checked</h3>
 <h2 class="text-anime-style-2" data-cursor="-opaque">We only recommend personally <span>verified vendors</span></h2>
-<p class="wow fadeInUp" data-wow-delay="0.2s">From material suppliers for interior projects to contractors for architectural execution — every vendor we recommend is vetted, so you're not gambling on someone we haven't worked with before.</p>
+<p class="wow fadeInUp" data-wow-delay="0.2s" style="text-align: justify;">Our vendor network spans material suppliers, fabricators, contractors, and specialized artisans — each evaluated through direct project collaboration before recommendation. We assess quality standards, timeline reliability, pricing transparency, and post-delivery support, ensuring clients receive vetted partners who meet our execution benchmarks, not untested referrals that shift project risk to you.</p>
 </div>
 <!-- Section Title End -->
 </div>
@@ -747,7 +793,7 @@
 <div class="col-lg-6">
 <!-- Section Title Content Start -->
 <div class="section-title-content dark-section">
-<p class="wow fadeInUp" data-wow-delay="0.2s">A consistent four-step process guides every consultation, whether it's a design review, a full project plan, or a Vastu assessment.</p>
+<p class="wow fadeInUp" data-wow-delay="0.2s" style="text-align: justify;">Our structured methodology ensures consistent service delivery across all project types — from residential interiors to commercial spaces, architectural planning to Vastu consultancy — maintaining quality benchmarks at every engagement level.</p>
 </div>
 <!-- Section Title Content End -->
 </div>
@@ -763,7 +809,7 @@
 </div>
 <div class="how-we-work-content">
 <h3>01. consultation</h3>
-<p>Understand your space, requirement, and any Vastu concerns — over a call or a site visit.</p>
+<p style="text-align: justify;">Initial discovery session to document project scope, spatial requirements, design preferences, budget parameters, and timeline expectations through detailed site analysis or remote consultation.</p>
 </div>
 </div>
 <!-- How We Item End -->
@@ -774,7 +820,7 @@
 </div>
 <div class="how-we-work-content">
 <h3>02. assessment</h3>
-<p>Site or layout review, covering design, structural, and Vastu factors together — not in isolation.</p>
+<p style="text-align: justify;">Comprehensive evaluation integrating interior design feasibility, architectural constraints, structural considerations, and Vastu compliance — delivered as unified analysis, not fragmented reports.</p>
 </div>
 </div>
 <!-- How We Item End -->
@@ -785,7 +831,7 @@
 </div>
 <div class="how-we-work-content">
 <h3>03. recommendation</h3>
-<p>A single, coordinated set of recommendations, not siloed advice from separate specialists.</p>
+<p style="text-align: justify;">Coordinated design solutions with itemized implementation roadmap, material specifications, vendor references, cost estimates, and phased execution timelines — all pre-validated against project constraints.</p>
 </div>
 </div>
 <!-- How We Item End -->
@@ -796,7 +842,7 @@
 </div>
 <div class="how-we-work-content">
 <h3>04. ongoing advisory</h3>
-<p>Support through execution if you need it — from planning through to final handover.</p>
+<p style="text-align: justify;">Optional execution support including vendor liaison, site supervision, quality checks, design clarifications, and post-installation review — ensuring recommendations translate accurately from documentation to reality.</p>
 </div>
 </div>
 <!-- How We Item End -->
@@ -818,7 +864,7 @@
 <div class="section-title">
 <h3 class="wow fadeInUp">asked questions</h3>
 <h2 class="text-anime-style-2" data-cursor="-opaque">Have a question? Look <span>here first</span></h2>
-<p class="wow fadeInUp" data-wow-delay="0.2s">A few things people usually ask before booking a consultation.</p>
+<p class="wow fadeInUp" data-wow-delay="0.2s" style="text-align: justify;">Common queries addressed before initiating a formal project engagement or consultation booking.</p>
 </div>
 <!-- Section Title End -->
 <!-- FAQ Accordion Start -->
@@ -832,7 +878,7 @@
 </h2>
 <div aria-labelledby="heading1" class="accordion-collapse collapse show" data-bs-parent="#accordion" id="collapse1">
 <div class="accordion-body">
-<p>Share your space, requirement, and any Vastu concerns — we respond with a clear scope and fee, then move to assessment and a coordinated set of recommendations.</p>
+<p style="text-align: justify;">Project initiation includes requirement documentation, site assessment, scope definition, and fee structure agreement, followed by comprehensive design evaluation and integrated recommendation delivery.</p>
 </div>
 </div>
 </div>
@@ -846,7 +892,7 @@
 </h2>
 <div aria-labelledby="heading2" class="accordion-collapse collapse" data-bs-parent="#accordion" id="collapse2">
 <div class="accordion-body">
-<p>It depends on scope — a single room can be a few weeks, while a full office fit-out is discussed and scheduled during the planning stage so you know the timeline upfront.</p>
+<p style="text-align: justify;">Timeline varies by project complexity — residential room consultations typically span 2-4 weeks, comprehensive commercial fit-outs require 8-16 weeks depending on scope, defined during initial planning phase.</p>
 </div>
 </div>
 </div>
@@ -860,7 +906,7 @@
 </h2>
 <div aria-labelledby="heading3" class="accordion-collapse collapse" data-bs-parent="#accordion" id="collapse3">
 <div class="accordion-body">
-<p>Yes — from a single room Vastu review to a full commercial office fit-out plan, scoped and quoted based on the size of the project.</p>
+<p style="text-align: justify;">Our consultancy serves both residential and commercial sectors — from individual room renovations and Vastu assessments to complete office interiors and architectural projects, with customized scope and pricing.</p>
 </div>
 </div>
 </div>
@@ -874,7 +920,7 @@
 </h2>
 <div aria-labelledby="heading4" class="accordion-collapse collapse" data-bs-parent="#accordion" id="collapse4">
 <div class="accordion-body">
-<p>Call or WhatsApp us at +91 97199 73700, email info@arvvastuinteriors.com, or fill out the contact form — we typically respond within a business day.</p>
+<p style="text-align: justify;">Contact via phone/WhatsApp at +91 97199 73700, email info@arvvastuinteriors.com, or submit our online inquiry form — project quotations are typically provided within one business day of initial consultation.</p>
 </div>
 </div>
 </div>
@@ -897,58 +943,7 @@
 </div>
 </div>
 <!-- Our Faqs End -->
-<!-- Our Clients Start -->
-<div class="our-clients">
-<div class="container">
-<div class="row">
-<div class="col-lg-12">
-<div class="our-clients-box">
-<!-- Section Title Start -->
-<div class="section-title">
-<h3 class="wow fadeInUp">our network</h3>
-<h2 class="text-anime-style-2" data-cursor="-opaque">Working with homeowners, businesses &amp; architects</h2>
-<p class="wow fadeInUp" data-wow-delay="0.2s">From homeowners planning a renovation to businesses commissioning a new office fit-out — our approach stays the same: understand the requirement, quote it honestly, and advise on time.</p>
-</div>
-<!-- Section Title End -->
-<!-- Client Logo Slider Start -->
-<!-- <div class="our-client-slider">
-<div class="swiper">
-<div class="swiper-wrapper">
-<div class="swiper-slide">
-<div class="client-logo">
-<img alt="" decoding="async" loading="lazy" src="images/client-logo-1.svg"/>
-</div>
-</div>
-<div class="swiper-slide">
-<div class="client-logo">
-<img alt="" decoding="async" loading="lazy" src="images/client-logo-2.svg"/>
-</div>
-</div>
-<div class="swiper-slide">
-<div class="client-logo">
-<img alt="" decoding="async" loading="lazy" src="images/client-logo-3.svg"/>
-</div>
-</div>
-<div class="swiper-slide">
-<div class="client-logo">
-<img alt="" decoding="async" loading="lazy" src="images/client-logo-4.svg"/>
-</div>
-</div>
-<div class="swiper-slide">
-<div class="client-logo">
-<img alt="" decoding="async" loading="lazy" src="images/client-logo-1.svg"/>
-</div>
-</div>
-</div>
-</div>
-</div> -->
-<!-- Client Logo Slider End -->
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Our Clients End -->
+
 <!-- Footer Start -->
 <footer class="main-footer">
 <div class="container">
