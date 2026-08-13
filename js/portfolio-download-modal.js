@@ -291,7 +291,7 @@
   let lastFocusedElement = null;
 
   console.log(
-    "ARV Portfolio Modal JS Loaded - Live API Version 9"
+    "ARV Portfolio Modal JS Loaded - Live API Version 10 (Fixed Download Button)"
   );
 
   /* =====================================================
@@ -498,6 +498,19 @@
       );
 
       link.setAttribute("role", "button");
+    });
+
+    // Also prepare download portfolio buttons
+    const downloadButtons = rootElement.querySelectorAll(
+      '.download-portfolio-btn, .arv-portfolio-download-trigger'
+    );
+
+    downloadButtons.forEach(function (button) {
+      button.setAttribute(
+        "data-arv-portfolio-trigger",
+        "true"
+      );
+      console.log("Prepared download button:", button);
     });
   };
 
@@ -945,12 +958,15 @@
       // Check if it's a download portfolio button (triggers modal)
       const isDownloadTrigger = 
         clickedElement.classList.contains("download-portfolio-btn") ||
-        clickedElement.classList.contains("arv-portfolio-download-trigger");
+        clickedElement.classList.contains("arv-portfolio-download-trigger") ||
+        clickedElement.closest(".download-portfolio-btn") ||
+        clickedElement.closest(".arv-portfolio-download-trigger");
 
       if (isDownloadTrigger) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
+        console.log("Download Portfolio button clicked - Opening modal");
         openModal();
         return;
       }
