@@ -200,7 +200,10 @@ body{
     overflow: hidden;
     z-index: 0;
 }
+.btn-default {
+	    background-color:#C98A00;
 
+}
 .btn-default:hover{
 	background: transparent;
     color: var(--white-color);
