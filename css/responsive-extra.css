@@ -25,11 +25,22 @@ h1, h2, h3, h4, h5, h6, p, a {
 /* Extra-small phones (< 375px) — tighten spacing so nothing overflows */
 @media only screen and (max-width: 360px) {
   .container {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
+		        width: max-content;
+
   }
   h1 { font-size: 28px; }
   h2 { font-size: 22px; }
+}
+
+/* Very small screens (< 320px) — minimal padding for maximum width */
+@media only screen and (max-width: 320px) {
+  .container {
+    padding-left: 2px;
+    padding-right: 2px;
+	        width: max-content;
+  }
 }
 
 /* Respect user motion preferences (accessibility + Core Web Vitals friendliness) */
