@@ -384,7 +384,7 @@
 
 				// flatten all URLs into one array
 				items.forEach(function (item) {
-					var altText = item.title || "ARV EnterprisesConsultants Gallery";
+					var altText = item.title || "ARV VASTU INTERIORS Consultants Gallery";
 					var urls = Array.isArray(item.url) ? item.url : [item.url];
 					urls.forEach(function (imgUrl) {
 						if (!imgUrl || !imgUrl.startsWith("http")) return;
@@ -480,7 +480,7 @@
 				var p = response.data;
 
 				// Page title + breadcrumb
-				document.title = p.title + " | ARV EnterprisesConsultants";
+				document.title = p.title + " | ARV VASTU INTERIORSConsultants";
 				$("#detailPageTitle").text(p.title);
 				$("#detailBreadcrumb").text(p.title);
 
@@ -630,8 +630,8 @@
 					var b = response.data.blog || response.data;
 
 					// Page meta
-					document.title = b.heading + " | ARV EnterprisesConsultants";
-					if (b.seoTitle) document.title = b.seoTitle + " | ARV EnterprisesConsultants";
+					document.title = b.heading + " | ARV VASTU INTERIORSConsultants";
+					if (b.seoTitle) document.title = b.seoTitle + " | ARV VASTU INTERIORSConsultants";
 					$("#metaDescription").attr("content", b.shortDescription || "");
 					$("#metaKeywords").attr("content", b.metaKeywords || "");
 
@@ -645,7 +645,7 @@
 					}
 
 					// Meta line — first tag + date
-					var firstTag = (b.tags && b.tags.length) ? b.tags[0] : "ARV EnterprisesConsultants";
+					var firstTag = (b.tags && b.tags.length) ? b.tags[0] : "ARV VASTU INTERIORSConsultants";
 					var dateStr = b.createdAt
 						? new Date(b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })
 						: "";
@@ -854,7 +854,7 @@
 						var slide = [
 							'<div class="swiper-slide hero-slide">',
 							'  <div class="hero-slider-image">',
-							'    <img src="' + imgUrl + '" alt="' + (s.heading || "ARV EnterprisesConsultants") + '" onerror="this.onerror=null;this.src=\'images/hero-bg.jpg\';">',
+							'    <img src="' + imgUrl + '" alt="' + (s.heading || "ARV VASTU INTERIORSConsultants") + '" onerror="this.onerror=null;this.src=\'images/hero-bg.jpg\';">',
 							'  </div>',
 							'  <div class="container">',
 							'    <div class="row align-items-center">',
@@ -922,7 +922,7 @@
 	}
 
 })(jQuery);
-/* ARV Enterprises — auto-highlight current page in nav */
+/* ARV VASTU INTERIORS — auto-highlight current page in nav */
 jQuery(function ($) {
 	var path = window.location.pathname.split("/").pop() || "index.html";
 	$("#menu > li > a").each(function () {
